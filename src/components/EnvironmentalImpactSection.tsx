@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from 'react';
-import { Leaf, Globe, TreeDeciduous, RecycleBin } from 'lucide-react';
+import { Leaf, Globe, TreeDeciduous, Recycle } from 'lucide-react';
 
 const EnvironmentalImpactSection = () => {
   const [counts, setCounts] = useState({
@@ -138,7 +138,7 @@ const EnvironmentalImpactSection = () => {
             <h3 className="text-2xl font-bold mb-8 text-center">Nuestro Impacto en Números</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              <StatCard icon={RecycleBin} value={counts.tonsRecycled} label="Toneladas Recicladas" />
+              <StatCard icon={Recycle} value={counts.tonsRecycled} label="Toneladas Recicladas" />
               <StatCard icon={Leaf} value={counts.co2Reduced} label="Ton. de CO2 Evitadas" />
               <StatCard icon={TreeDeciduous} value={counts.treesPlanted} label="Árboles Plantados" />
               <StatCard icon={Globe} value={counts.projectsImplemented} label="Proyectos Implementados" />
@@ -184,7 +184,7 @@ const StatCard = ({ icon: Icon, value, label }: {
 
 const environmentalChallenges = [
   {
-    icon: RecycleBin,
+    icon: Recycle,
     title: "Gestión de Residuos",
     description: "Miles de toneladas de residuos terminan en vertederos, contaminando suelos y aguas subterráneas."
   },
