@@ -1,8 +1,10 @@
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Recycle, FlaskConical, Bolt, Factory } from 'lucide-react';
 
 const WhatWeDoSection = () => {
+  const [activeStep, setActiveStep] = useState(0);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -20,8 +22,14 @@ const WhatWeDoSection = () => {
     const elements = document.querySelectorAll('.animated-section');
     elements.forEach((el) => observer.observe(el));
 
+    // Rotate through steps automatically
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % 4);
+    }, 3000);
+
     return () => {
       elements.forEach((el) => observer.unobserve(el));
+      clearInterval(interval);
     };
   }, []);
 
@@ -51,14 +59,72 @@ const WhatWeDoSection = () => {
         <div className="mt-16 max-w-4xl mx-auto animated-section">
           <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
             <h3 className="text-2xl font-bold mb-4 text-center">Ciclo de Transformación</h3>
-            <p className="text-lg text-enerpy-gray mb-6">
-              Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales y contribuyendo a la economía circular.
+            <p className="text-lg text-enerpy-gray mb-6 text-center">
+              Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <ProcessStep number={1} text="Recolección de residuos" />
-              <ProcessStep number={2} text="Clasificación y preparación" />
-              <ProcessStep number={3} text="Procesamiento RMO®" />
-              <ProcessStep number={4} text="Obtención de productos sostenibles" />
+            
+            {/* Circular Process Visualization */}
+            <div className="relative w-72 h-72 mx-auto my-8">
+              {/* Circle background */}
+              <div className="absolute inset-0 rounded-full border-4 border-dashed border-enerpy-light/50"></div>
+              
+              {/* Process steps positioned in a circle */}
+              {processSteps.map((step, index) => {
+                // Calculate position on circle
+                const angle = (Math.PI * 2 * index) / processSteps.length - Math.PI / 2;
+                const x = Math.cos(angle) * 120 + 144;
+                const y = Math.sin(angle) * 120 + 144;
+                
+                const isActive = index === activeStep;
+                
+                return (
+                  <div 
+                    key={index}
+                    className={`absolute transition-all duration-500 ${isActive ? 'scale-110' : 'scale-100'}`}
+                    style={{ 
+                      left: `${x}px`, 
+                      top: `${y}px`, 
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                    onClick={() => setActiveStep(index)}
+                  >
+                    <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
+                      isActive ? 'bg-enerpy-primary text-white' : 'bg-white text-enerpy-gray border border-gray-200'
+                    }`}>
+                      {step.icon({ size: 24 })}
+                    </div>
+                  </div>
+                );
+              })}
+              
+              {/* Active step description in center */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="bg-white rounded-full w-32 h-32 flex items-center justify-center shadow-md">
+                  <div className="text-center px-2">
+                    <div className="w-6 h-6 rounded-full bg-enerpy-primary text-white flex items-center justify-center mx-auto mb-1">
+                      {activeStep + 1}
+                    </div>
+                    <p className="text-xs font-medium text-enerpy-dark leading-tight">
+                      {processSteps[activeStep].text}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Rotating indicator */}
+              <div 
+                className="absolute inset-0 transition-transform duration-1000 ease-in-out"
+                style={{ transform: `rotate(${activeStep * 90}deg)` }}
+              >
+                <div className="w-3 h-3 bg-enerpy-primary rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+                <div className="w-1 h-36 bg-enerpy-primary/20 absolute top-0 left-1/2 transform -translate-x-1/2 origin-bottom"></div>
+              </div>
+            </div>
+            
+            {/* Step description below the circle */}
+            <div className="text-center mt-8 h-16">
+              <h4 className="font-bold text-enerpy-primary">{processSteps[activeStep].title}</h4>
+              <p className="text-enerpy-gray text-sm mt-1">{processSteps[activeStep].description}</p>
             </div>
           </div>
         </div>
@@ -85,14 +151,32 @@ const FeatureCard = ({ icon: Icon, title, description, delay }: {
   </div>
 );
 
-const ProcessStep = ({ number, text }: { number: number; text: string }) => (
-  <div className="flex items-center gap-3 bg-white p-3 rounded-md shadow-sm">
-    <div className="w-8 h-8 rounded-full bg-enerpy-primary flex items-center justify-center text-white font-bold">
-      {number}
-    </div>
-    <p className="text-sm font-medium">{text}</p>
-  </div>
-);
+const processSteps = [
+  {
+    icon: Recycle,
+    title: "Recolección de residuos",
+    text: "Recolección de residuos",
+    description: "Captura y clasificación de diversos materiales de desecho."
+  },
+  {
+    icon: Factory,
+    title: "Clasificación y preparación",
+    text: "Clasificación y preparación",
+    description: "Procesamiento inicial de los materiales para optimizar su transformación."
+  },
+  {
+    icon: FlaskConical,
+    title: "Procesamiento RMO®",
+    text: "Procesamiento RMO®",
+    description: "Aplicación de nuestra tecnología patentada de radiólisis fotónica focalizada."
+  },
+  {
+    icon: Bolt,
+    title: "Productos sostenibles",
+    text: "Productos sostenibles",
+    description: "Obtención de aceites ecológicos, carbón y gas con múltiples aplicaciones."
+  }
+];
 
 const features = [
   {

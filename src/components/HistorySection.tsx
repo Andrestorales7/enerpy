@@ -94,7 +94,7 @@ const TimelineEvent = ({
   <div className={`flex flex-col md:flex-row items-center relative mb-12 ${!isLast ? 'pb-8' : ''}`}>
     {/* Content */}
     <div className={`md:w-1/2 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:order-last'}`}>
-      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+      <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200 hover:border-enerpy-primary transition-all duration-300 hover:shadow-lg">
         <div className="inline-block px-3 py-1 bg-enerpy-primary/10 text-enerpy-primary rounded mb-3 text-sm font-medium">
           {year}
         </div>
@@ -102,6 +102,9 @@ const TimelineEvent = ({
         <p className="text-enerpy-gray">{description}</p>
       </div>
     </div>
+    
+    {/* Empty space for the other side */}
+    <div className={`md:w-1/2 ${!isLeft ? 'md:pr-12' : 'md:pl-12 md:order-last'}`}></div>
     
     {/* Dot on timeline */}
     <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 w-5 h-5 rounded-full bg-enerpy-primary border-4 border-white"></div>
