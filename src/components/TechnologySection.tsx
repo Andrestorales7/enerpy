@@ -69,7 +69,8 @@ const TechnologySection = () => {
                         <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300 h-full">
                           <CardContent className="flex flex-col items-center p-6">
                             <div className="w-16 h-16 rounded-full bg-enerpy-primary/10 flex items-center justify-center mb-4">
-                              {step.icon({ className: "text-enerpy-primary", size: 26 })}
+                              {/* Fix: Use the Icon component directly instead of calling it as a function */}
+                              <step.icon className="text-enerpy-primary" size={26} />
                             </div>
                             <h4 className="text-xl font-bold mb-2 text-center">{step.title}</h4>
                             <p className="text-enerpy-gray/80 text-center">{step.description}</p>
