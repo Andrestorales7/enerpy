@@ -1,5 +1,14 @@
 
 import { useEffect, useState } from 'react';
+import { 
+  Carousel, 
+  CarouselContent, 
+  CarouselItem, 
+  CarouselNext, 
+  CarouselPrevious 
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { ArrowRight, Recycle, Leaf, Globe } from "lucide-react";
 
 const TechnologySection = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -21,14 +30,8 @@ const TechnologySection = () => {
     const elements = document.querySelectorAll('.animated-section');
     elements.forEach((el) => observer.observe(el));
 
-    // Auto rotate through steps
-    const interval = setInterval(() => {
-      setActiveStep((prev) => (prev + 1) % technologySteps.length);
-    }, 5000);
-
     return () => {
       elements.forEach((el) => observer.unobserve(el));
-      clearInterval(interval);
     };
   }, []);
 
@@ -43,37 +46,64 @@ const TechnologySection = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          <div className="animated-section order-2 lg:order-1">
-            <h3 className="text-2xl font-bold mb-6">Nuestro Reactor Revolucionario</h3>
-            <p className="text-lg text-enerpy-gray mb-8">
-              La tecnología RMO® ha sido desarrollada y patentada por Enerpy S.A.C.I., permitiendo realizar el más avanzado método de tratamiento térmico para gestión final de residuos mediante la valorización y recuperación de sustancias básicas.
+        <div className="animated-section">
+          <div className="bg-white rounded-xl shadow-lg p-6 md:p-10 mb-16">
+            <h3 className="text-2xl font-bold mb-3 text-center">Nuestro Reactor Revolucionario</h3>
+            <p className="text-lg text-enerpy-gray mb-8 text-center max-w-3xl mx-auto">
+              La tecnología RMO® ha sido desarrollada y patentada por Enerpy S.A.C.I., permitiendo realizar 
+              el más avanzado método de tratamiento térmico para gestión final de residuos.
             </p>
             
-            <div className="space-y-6">
-              {technologySteps.map((step, index) => (
-                <TechStep 
-                  key={index} 
-                  number={index + 1} 
-                  title={step.title} 
-                  description={step.description} 
-                  isActive={index === activeStep}
-                  onClick={() => setActiveStep(index)}
-                />
-              ))}
-            </div>
-          </div>
-          
-          <div className="animated-section order-1 lg:order-2">
-            <div className="relative h-[500px] bg-reactor-pattern bg-cover bg-center rounded-xl overflow-hidden shadow-xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-8">
-                <div className="text-white">
-                  <h4 className="text-xl font-bold mb-2">Reactor de Materia Orgánica RMO</h4>
-                  <p className="text-sm md:text-base opacity-90">
-                    Evaluado y certificado por TÜV Rheinland de Alemania y TNO de Los Países Bajos
-                  </p>
+            <div className="mb-10">
+              <Carousel 
+                opts={{
+                  align: "center",
+                  loop: true,
+                }}
+                className="w-full max-w-5xl mx-auto"
+              >
+                <CarouselContent>
+                  {technologySteps.map((step, index) => (
+                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pl-4">
+                      <div className="p-1">
+                        <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300 h-full">
+                          <CardContent className="flex flex-col items-center p-6">
+                            <div className="w-16 h-16 rounded-full bg-enerpy-primary/10 flex items-center justify-center mb-4">
+                              {step.icon({ className: "text-enerpy-primary", size: 26 })}
+                            </div>
+                            <h4 className="text-xl font-bold mb-2 text-center">{step.title}</h4>
+                            <p className="text-enerpy-gray/80 text-center">{step.description}</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                  
+                  <CarouselItem className="md:basis-1/2 lg:basis-2/3 pl-4">
+                    <div className="p-1">
+                      <Card className="border-0 shadow-md overflow-hidden h-full">
+                        <CardContent className="p-0">
+                          <div className="relative h-full min-h-[300px] bg-reactor-pattern bg-cover bg-center">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-6">
+                              <div className="text-white">
+                                <h4 className="text-xl font-bold mb-2">Reactor de Materia Orgánica RMO</h4>
+                                <p className="text-sm opacity-90">
+                                  Evaluado y certificado por TÜV Rheinland de Alemania y TNO de Los Países Bajos
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </CarouselItem>
+                </CarouselContent>
+                
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  <CarouselPrevious className="relative left-0 right-auto bg-white hover:bg-gray-100 text-enerpy-gray border border-gray-200" />
+                  <CarouselNext className="relative right-0 left-auto bg-white hover:bg-gray-100 text-enerpy-gray border border-gray-200" />
                 </div>
-              </div>
+              </Carousel>
             </div>
           </div>
         </div>
@@ -100,57 +130,26 @@ const TechnologySection = () => {
   );
 };
 
-const TechStep = ({ 
-  number, 
-  title, 
-  description, 
-  isActive, 
-  onClick 
-}: { 
-  number: number; 
-  title: string; 
-  description: string;
-  isActive: boolean;
-  onClick: () => void;
-}) => (
-  <div 
-    className={`p-5 rounded-lg cursor-pointer transition-all duration-300 ${
-      isActive ? 'bg-enerpy-primary text-white shadow-lg' : 'bg-white border border-gray-200 hover:border-enerpy-primary'
-    }`}
-    onClick={onClick}
-  >
-    <div className="flex items-start gap-4">
-      <div 
-        className={`flex items-center justify-center w-8 h-8 rounded-full flex-shrink-0 font-bold ${
-          isActive ? 'bg-white text-enerpy-primary' : 'bg-enerpy-light/20 text-enerpy-primary'
-        }`}
-      >
-        {number}
-      </div>
-      <div>
-        <h4 className="font-bold text-lg mb-2">{title}</h4>
-        <p className={isActive ? 'text-white/90' : 'text-enerpy-gray/80'}>{description}</p>
-      </div>
-    </div>
-  </div>
-);
-
 const technologySteps = [
   {
     title: "Radiólisis Fotónica Focalizada",
-    description: "Proceso patentado que utiliza energía fotónica para descomponer materiales de desecho a nivel molecular."
+    description: "Proceso patentado que utiliza energía fotónica para descomponer materiales de desecho a nivel molecular.",
+    icon: Recycle
   },
   {
     title: "Tratamiento Térmico Avanzado",
-    description: "Sistema de control térmico preciso que optimiza la recuperación de sustancias básicas de los residuos."
+    description: "Sistema de control térmico preciso que optimiza la recuperación de sustancias básicas de los residuos.",
+    icon: Globe
   },
   {
     title: "Conversión Catalítica",
-    description: "Transformación controlada de los componentes moleculares en productos de alto valor energético."
+    description: "Transformación controlada de los componentes moleculares en productos de alto valor energético.",
+    icon: Leaf
   },
   {
     title: "Separación y Purificación",
-    description: "Procesos avanzados que separan y purifican los diferentes productos resultantes para maximizar su calidad."
+    description: "Procesos avanzados que separan y purifican los diferentes productos resultantes para maximizar su calidad.",
+    icon: ArrowRight
   }
 ];
 
