@@ -76,6 +76,7 @@ const WhatWeDoSection = () => {
                 const y = Math.sin(angle) * 120 + 144;
                 
                 const isActive = index === activeStep;
+                const Icon = step.icon;
                 
                 return (
                   <div 
@@ -91,7 +92,7 @@ const WhatWeDoSection = () => {
                     <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
                       isActive ? 'bg-enerpy-primary text-white' : 'bg-white text-enerpy-gray border border-gray-200'
                     }`}>
-                      {step.icon({ size: 24 })}
+                      <Icon size={24} />
                     </div>
                   </div>
                 );
