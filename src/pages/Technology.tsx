@@ -1,0 +1,36 @@
+
+import { useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import TechnologySection from '@/components/TechnologySection';
+import ScrollToTop from '@/components/ScrollToTop';
+
+const Technology = () => {
+  useEffect(() => {
+    // Update page title
+    document.title = 'ENERPY - Tecnología RMO®';
+    
+    // Scroll to top on page load
+    window.scrollTo(0, 0);
+  }, []);
+
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <main className="flex-grow pt-20">
+        <div className="bg-gradient-to-r from-enerpy-dark to-enerpy-primary py-20">
+          <div className="container mx-auto px-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-white text-center">
+              Tecnología RMO®
+            </h1>
+          </div>
+        </div>
+        <TechnologySection />
+      </main>
+      <Footer />
+      <ScrollToTop />
+    </div>
+  );
+};
+
+export default Technology;

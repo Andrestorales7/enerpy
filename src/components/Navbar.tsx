@@ -36,12 +36,12 @@ const Navbar = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">
-          <NavItem label="Inicio" href="#inicio" isScrolled={isScrolled} />
-          <NavItem label="¿Qué Hacemos?" href="#que-hacemos" isScrolled={isScrolled} />
-          <NavItem label="Tecnología RMO®" href="#tecnologia" isScrolled={isScrolled} />
-          <NavItem label="Impacto" href="#impacto" isScrolled={isScrolled} />
-          <NavItem label="Historia" href="#historia" isScrolled={isScrolled} />
-          <NavItem label="Contribuir" href="#contribuir" isScrolled={isScrolled} />
+          <NavItem label="Inicio" to="/" isScrolled={isScrolled} />
+          <NavItem label="¿Qué Hacemos?" to="/que-hacemos" isScrolled={isScrolled} />
+          <NavItem label="Tecnología RMO®" to="/tecnologia" isScrolled={isScrolled} />
+          <NavItem label="Impacto" to="/impacto" isScrolled={isScrolled} />
+          <NavItem label="Historia" to="/historia" isScrolled={isScrolled} />
+          <NavItem label="Contribuir" to="/contribuir" isScrolled={isScrolled} />
           <Link 
             to="/contacto" 
             className="px-4 py-2 bg-enerpy-primary hover:bg-enerpy-dark text-white rounded-md transition-colors duration-300"
@@ -68,12 +68,12 @@ const Navbar = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 top-[60px] bg-white z-40 md:hidden">
           <nav className="flex flex-col h-full p-6 space-y-6">
-            <MobileNavItem label="Inicio" href="#inicio" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="¿Qué Hacemos?" href="#que-hacemos" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="Tecnología RMO®" href="#tecnologia" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="Impacto" href="#impacto" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="Historia" href="#historia" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="Contribuir" href="#contribuir" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="Inicio" to="/" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="¿Qué Hacemos?" to="/que-hacemos" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="Tecnología RMO®" to="/tecnologia" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="Impacto" to="/impacto" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="Historia" to="/historia" onClick={() => setIsMenuOpen(false)} />
+            <MobileNavItem label="Contribuir" to="/contribuir" onClick={() => setIsMenuOpen(false)} />
             <Link 
               to="/contacto" 
               className="px-4 py-3 bg-enerpy-primary hover:bg-enerpy-dark text-white rounded-md transition-colors duration-300 w-full text-center"
@@ -88,26 +88,26 @@ const Navbar = () => {
   );
 };
 
-const NavItem = ({ label, href, isScrolled }: { label: string; href: string; isScrolled: boolean }) => (
-  <a 
-    href={href} 
+const NavItem = ({ label, to, isScrolled }: { label: string; to: string; isScrolled: boolean }) => (
+  <Link 
+    to={to} 
     className={cn(
       'font-medium transition-colors duration-300 hover:text-enerpy-primary',
       isScrolled ? 'text-enerpy-gray' : 'text-white'
     )}
   >
     {label}
-  </a>
+  </Link>
 );
 
-const MobileNavItem = ({ label, href, onClick }: { label: string; href: string; onClick: () => void }) => (
-  <a 
-    href={href}
+const MobileNavItem = ({ label, to, onClick }: { label: string; to: string; onClick: () => void }) => (
+  <Link 
+    to={to}
     className="text-enerpy-gray font-medium text-lg border-b border-gray-100 pb-2"
     onClick={onClick}
   >
     {label}
-  </a>
+  </Link>
 );
 
 export default Navbar;
