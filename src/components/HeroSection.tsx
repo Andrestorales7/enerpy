@@ -10,7 +10,7 @@ import {
 
 const heroImages = [
   {
-    url: '/images/arbol.jpg',
+    url: '/images/pichd.jpg',
     alt: 'Sustainable energy transformation'
   },
   {
@@ -26,6 +26,7 @@ const heroImages = [
 const HeroSection = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const handleScroll = () => {
     if (scrollRef.current) {
@@ -52,10 +53,14 @@ const HeroSection = () => {
     const elements = document.querySelectorAll('.hero-animate');
     elements.forEach(el => observer.observe(el));
 
-    // Image rotation
+    // Image rotation with smoother transitions
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
+        setIsTransitioning(false);
+      }, 1000); // Wait for fade out
+    }, 8000); // Change image every 8 seconds
 
     return () => {
       elements.forEach(el => observer.unobserve(el));
@@ -67,13 +72,16 @@ const HeroSection = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Overlay */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+        className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out ${
+          isTransitioning ? 'opacity-0' : 'opacity-100'
+        }`}
         style={{
           backgroundImage: `url(${heroImages[currentImageIndex].url})`,
-          opacity: 0.8
+          transform: 'scale(1.1)', // Slightly zoomed to prevent white edges during transition
+          filter: 'brightness(1.1) contrast(1.1)', // Enhance image clarity
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40"></div>
       </div>
 
       <div className="container mx-auto px-4 z-10 relative">
