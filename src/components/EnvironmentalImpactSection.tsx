@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import EnvironmentalChallenges from './environmental/EnvironmentalChallenges';
 import SolutionSection from './environmental/SolutionSection';

@@ -1,4 +1,3 @@
-
 import { ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -11,15 +10,15 @@ import {
 
 const heroImages = [
   {
-    url: '/lovable-uploads/59c09a67-e434-4fb0-bb13-e63dc4449891.png',
+    url: '/images/arbol.jpg',
     alt: 'Sustainable energy transformation'
   },
   {
-    url: '/images/hero-2.jpg',
+    url: '/images/greenlarndpic.jpg',
     alt: 'Industrial recycling process'
   },
   {
-    url: '/images/hero-3.jpg',
+    url: '/images/co2hero.jpg',
     alt: 'Green energy innovation'
   }
 ];
@@ -65,36 +64,18 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="inicio" className="relative h-screen flex items-center">
-      {/* Hero Image Carousel */}
-      <Carousel className="w-full h-full absolute inset-0">
-        <CarouselContent className="h-full">
-          {heroImages.map((image, index) => (
-            <CarouselItem key={index} className="h-full">
-              <div 
-                className="w-full h-full bg-cover bg-center"
-                style={{ 
-                  backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${image.url})` 
-                }}
-              >
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="absolute bottom-24 left-0 right-0 z-20 flex justify-center gap-2">
-          {heroImages.map((_, index) => (
-            <button 
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all ${
-                currentImageIndex === index ? 'bg-white scale-125' : 'bg-white/40'
-              }`}
-              onClick={() => setCurrentImageIndex(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-      </Carousel>
-      
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+        style={{
+          backgroundImage: `url(${heroImages[currentImageIndex].url})`,
+          opacity: 0.8
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
+      </div>
+
       <div className="container mx-auto px-4 z-10 relative">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-6 opacity-0 translate-y-10 transition-all duration-1000 delay-300 hero-animate">
