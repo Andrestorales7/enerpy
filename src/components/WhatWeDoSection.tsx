@@ -129,13 +129,18 @@ const WhatWeDoSection = () => {
           </div>
         </div>
       </div>
-      {/* Espacio reservado para imagen extra */}
-      <div className="imagen-extra w-full">
-        <img 
-          src="/images/ancho.jpg" 
-          alt="Imagen de ejemplo" 
-          style={{ width: '100%', height: '480px', objectFit: 'cover', display: 'block' }}
-        />
+      {/* Espacio reservado para video */}
+      <div className="video-container w-full">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="w-full h-[480px] object-cover"
+        >
+          <source src="/images/nowaves.mp4" type="video/mp4" />
+          Tu navegador no soporta el elemento de video.
+        </video>
       </div>
     </section>
   );
