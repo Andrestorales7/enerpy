@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { 
   Carousel, 
@@ -105,24 +104,6 @@ const TechnologySection = () => {
                   <CarouselNext className="relative right-0 left-auto bg-white hover:bg-gray-100 text-enerpy-gray border border-gray-200" />
                 </div>
               </Carousel>
-            </div>
-          </div>
-        </div>
-        
-        <div className="mt-20 animated-section">
-          <div className="bg-white rounded-xl shadow-lg p-8 max-w-4xl mx-auto">
-            <h3 className="text-2xl font-bold mb-6 text-center">Productos Obtenidos</h3>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-              {products.map((product, index) => (
-                <div key={index} className="text-center">
-                  <div className="w-20 h-20 rounded-full bg-enerpy-light/20 flex items-center justify-center mx-auto mb-4">
-                    <div className="w-12 h-12 rounded-full" style={{ backgroundColor: product.color }}></div>
-                  </div>
-                  <h4 className="font-bold mb-1">{product.name}</h4>
-                  <p className="text-sm text-enerpy-gray">{product.description}</p>
-                </div>
-              ))}
             </div>
           </div>
         </div>
