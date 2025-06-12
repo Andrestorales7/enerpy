@@ -72,7 +72,7 @@ const TechnologySection = () => {
                       </div>
                     </div>
                     <img 
-                      src={`/images/technology-${index + 1}.jpg`}
+                      src={step.image}
                       alt={step.title}
                       className="w-full h-full object-cover"
                     />
@@ -114,22 +114,26 @@ const technologySteps = [
   {
     title: "Radiólisis Fotónica Focalizada",
     description: "Proceso patentado que utiliza energía fotónica para descomponer materiales de desecho a nivel molecular.",
-    icon: Recycle
+    icon: Recycle,
+    image: "/images/"
   },
   {
     title: "Tratamiento Térmico Avanzado",
     description: "Sistema de control térmico preciso que optimiza la recuperación de sustancias básicas de los residuos.",
-    icon: Globe
+    icon: Globe,
+    image: "/images/water-treatment.jpg"
   },
   {
     title: "Conversión Catalítica",
     description: "Transformación controlada de los componentes moleculares en productos de alto valor energético.",
-    icon: Leaf
+    icon: Leaf,
+    image: "/images/conversion-catalica.jpg"
   },
   {
     title: "Separación y Purificación",
     description: "Procesos avanzados que separan y purifican los diferentes productos resultantes para maximizar su calidad.",
-    icon: ArrowRight
+    icon: ArrowRight,
+    image: "/images/separacion-purificacion.jpg"
   }
 ];
 
