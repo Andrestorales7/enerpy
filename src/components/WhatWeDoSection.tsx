@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Recycle, FlaskConical, Bolt, Factory } from 'lucide-react';
 
@@ -129,6 +128,14 @@ const WhatWeDoSection = () => {
             </div>
           </div>
         </div>
+      </div>
+      {/* Espacio reservado para imagen extra */}
+      <div className="imagen-extra w-full">
+        <img 
+          src="/images/ancho.jpg" 
+          alt="Imagen de ejemplo" 
+          style={{ width: '100%', height: '480px', objectFit: 'cover', display: 'block' }}
+        />
       </div>
     </section>
   );
