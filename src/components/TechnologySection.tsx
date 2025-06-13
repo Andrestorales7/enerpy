@@ -115,7 +115,7 @@ const technologySteps = [
     title: "Radiólisis Fotónica Focalizada",
     description: "Proceso patentado que utiliza energía fotónica para descomponer materiales de desecho a nivel molecular.",
     icon: Recycle,
-    image: "/images/"
+    image: "/images/reactor2.jpg"
   },
   {
     title: "Tratamiento Térmico Avanzado",
@@ -137,27 +137,6 @@ const technologySteps = [
   }
 ];
 
-const products = [
-  {
-    name: "Aceites Livianos",
-    description: "Combustible ecológico",
-    color: "#FFC300"
-  },
-  {
-    name: "Aceites Pesados",
-    description: "Para uso industrial",
-    color: "#884A39"
-  },
-  {
-    name: "Carbón",
-    description: "Alta eficiencia energética",
-    color: "#1A1A1A"
-  },
-  {
-    name: "Gas Ecológico",
-    description: "Baja huella de carbono",
-    color: "#7AC5CD"
-  }
-];
+
 
 export default TechnologySection;
