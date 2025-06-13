@@ -139,7 +139,6 @@ const WhatWeDoSection = () => {
           className="w-full h-[480px] object-cover"
         >
           <source src="/images/nowaves.mp4" type="video/mp4" />
-          Tu navegador no soporta el elemento de video.
         </video>
       </div>
     </section>
