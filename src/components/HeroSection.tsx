@@ -14,7 +14,7 @@ const heroImages = [
     alt: 'Sustainable energy transformation'
   },
   {
-    url: '/images/',
+    url: '/images/mountains.jpg',
     alt: 'Industrial recycling process'
   },
   {
