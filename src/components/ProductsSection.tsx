@@ -64,7 +64,7 @@ const ProductsSection = () => {
 
           <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
             <img 
-              src="/images/productos.jpg" 
+              src="/images/carbon2.jpg" 
               alt="Productos Energéticos" 
               className="w-full h-[600px] object-cover"
             />
