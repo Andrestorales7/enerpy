@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Recycle, FlaskConical, Bolt, Factory } from 'lucide-react';
+import { Recycle, FlaskConical, Bolt, Factory, ArrowRight, CheckCircle, Leaf } from 'lucide-react';
 
 const WhatWeDoSection = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -22,39 +22,81 @@ const WhatWeDoSection = () => {
     elements.forEach((el) => observer.observe(el));
 
     // Rotate through steps automatically
-    const interval = setInterval(() => {
+    const stepInterval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 4);
-    }, 3000);
+    }, 4000);
 
     return () => {
       elements.forEach((el) => observer.unobserve(el));
-      clearInterval(interval);
+      clearInterval(stepInterval);
     };
   }, []);
 
   return (
-    <section id="que-hacemos" className="py-24 bg-white">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16 animated-section">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">¿Qué Hacemos?</h2>
-          <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
-          <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
-            Enerpy trasnforma residuos en materiales, que son materia prima para la industria quimica y soluciones energeticas sostenibles.
+    <section id="que-hacemos" className="py-20 bg-gradient-to-br from-green-50 via-white to-emerald-50">
+      <div className="w-full px-6">
+        {/* Header Section */}
+        <div className="text-center mb-20 animated-section">
+          <div className="inline-flex items-center px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-6">
+            <CheckCircle className="w-4 h-4 mr-2" />
+            Tecnología Innovadora
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-green-800 via-emerald-800 to-green-800 bg-clip-text text-transparent">
+            ¿Qué Hacemos?
+          </h2>
+          <div className="w-32 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-8"></div>
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+            Transformamos residuos en soluciones energéticas sostenibles mediante nuestra tecnología patentada RMO®, 
+            creando un futuro más limpio y eficiente.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {/* Main Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
           {features.map((feature, index) => (
-            <FeatureCard
+            <ModernFeatureCard
               key={index}
               icon={feature.icon}
               title={feature.title}
               description={feature.description}
-              delay={index * 100}
+              index={index}
             />
           ))}
         </div>
 
+        {/* Ecological Footprint Section - Two Columns */}
+        <section className="w-full flex flex-col lg:flex-row items-stretch mb-20 min-h-[420px] lg:min-h-[480px]">
+          {/* Left: Text */}
+          <div className="flex-1 flex items-center justify-center bg-green-800/90 p-10 lg:p-16 rounded-t-3xl lg:rounded-l-3xl lg:rounded-tr-none">
+            <div className="max-w-xl">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">HUELLA ECOLÓGICA</h2>
+              <p className="text-lg text-green-100 mb-4">
+                La huella ecológica mide cuánto capital natural necesita el ser humano para sostener su estilo de vida o economía. Este cálculo se hace mediante una contabilidad ecológica que revela la presión que ejercemos sobre los recursos del planeta.
+              </p>
+              <p className="text-lg text-green-100 mb-4">
+                El <span className="font-bold text-emerald-200">RMO (Recuperación de Materia Orgánica)</span> surge como una solución concreta para reducir esa presión. Permite eliminar residuos transformándolos en materia prima reutilizable, cumpliendo con el principio de <span className="italic text-emerald-100">"de la cuna a la cuna"</span>.
+              </p>
+              <p className="text-lg text-green-100 mb-4">
+                Esto significa que, en lugar de desechar un producto al final de su vida útil, se lo convierte nuevamente en recurso útil, sin necesidad de extraer nuevos materiales de la naturaleza.
+              </p>
+              <p className="text-lg text-green-100">
+                Este proceso es altamente eficiente, autosuficiente en energía, no contamina el ambiente y ofrece productos de calidad. Así, el RMO se presenta como un modelo de negocio innovador que responde directamente a las necesidades de una economía sostenible.
+              </p>
+            </div>
+          </div>
+          {/* Right: Image */}
+          <div className="flex-1 min-h-[320px] lg:min-h-[480px] relative rounded-b-3xl lg:rounded-r-3xl lg:rounded-bl-none overflow-hidden">
+            <img 
+              src="/images/nature-background.jpg" 
+              alt="Naturaleza" 
+              className="w-full h-full object-cover object-center" 
+              style={{ minHeight: 240 }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-black/20 via-transparent to-transparent"></div>
+          </div>
+        </section>
+
+        {/* Process Visualization */}
         <div className="mt-16 max-w-4xl mx-auto animated-section">
           <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
             <h3 className="text-2xl font-bold mb-4 text-center">Ciclo de Transformación</h3>
@@ -129,39 +171,90 @@ const WhatWeDoSection = () => {
           </div>
         </div>
       </div>
-      {/* Espacio reservado para video */}
-      <div className="video-container w-full">
+
+      {/* Video Section */}
+      <div className="relative w-full h-[500px] overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent z-10"></div>
         <video 
           autoPlay 
           muted 
           loop 
           playsInline
-          className="w-full h-[480px] object-cover"
+          className="w-full h-full object-cover"
         >
           <source src="/images/nowaves.mp4" type="video/mp4" />
         </video>
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="text-center text-white">
+            <h3 className="text-3xl font-bold mb-4">Tecnología en Acción</h3>
+            <p className="text-xl opacity-90">Descubre cómo transformamos el futuro</p>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-const FeatureCard = ({ icon: Icon, title, description, delay }: { 
+const ModernFeatureCard = ({ 
+  icon: Icon, 
+  title, 
+  description, 
+  index 
+}: { 
   icon: React.ElementType; 
   title: string; 
   description: string;
-  delay: number;
+  index: number;
 }) => (
-  <div 
-    className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 animated-section"
-    style={{ transitionDelay: `${delay}ms` }}
-  >
-    <div className="flex items-center justify-center w-16 h-16 bg-enerpy-light/20 rounded-full mb-6 mx-auto text-enerpy-primary">
-      <Icon size={30} />
+  <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 hover:border-green-200">
+    {/* Background Pattern */}
+    <div className="absolute inset-0 bg-gradient-to-br from-green-50/50 to-emerald-50/50 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    {/* Content */}
+    <div className="relative z-10">
+      {/* Icon Container */}
+      <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+        <Icon size={28} className="text-white" />
+      </div>
+      
+      {/* Title */}
+      <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-green-700 transition-colors duration-300">
+        {title}
+      </h3>
+      
+      {/* Description */}
+      <p className="text-gray-600 leading-relaxed group-hover:text-gray-700 transition-colors duration-300">
+        {description}
+      </p>
+      
+      {/* Hover Effect Line */}
+      <div className="w-0 h-1 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full mt-6 group-hover:w-full transition-all duration-500"></div>
     </div>
-    <h3 className="text-xl font-bold mb-3 text-center">{title}</h3>
-    <p className="text-enerpy-gray/80 text-center">{description}</p>
   </div>
 );
+
+const features = [
+  {
+    icon: Recycle,
+    title: "Reciclaje Avanzado",
+    description: "Procesamos residuos orgánicos e inorgánicos mediante tecnología de vanguardia para maximizar su valor."
+  },
+  {
+    icon: FlaskConical,
+    title: "Investigación Científica",
+    description: "Desarrollamos soluciones innovadoras basadas en investigación científica y desarrollo tecnológico continuo."
+  },
+  {
+    icon: Bolt,
+    title: "Energía Sostenible",
+    description: "Generamos energía limpia y renovable a partir de residuos, reduciendo la dependencia de combustibles fósiles."
+  },
+  {
+    icon: Factory,
+    title: "Producción Industrial",
+    description: "Implementamos procesos industriales eficientes que transforman residuos en productos de alto valor comercial."
+  }
+];
 
 const processSteps = [
   {
@@ -187,29 +280,6 @@ const processSteps = [
     title: "Productos sostenibles",
     text: "Productos sostenibles",
     description: "Obtención de aceites ecológicos, carbón y gas con múltiples aplicaciones."
-  }
-];
-
-const features = [
-  {
-    icon: Recycle,
-    title: "Gestión de Residuos",
-    description: "Transformamos residuos plásticos, orgánicos y otros materiales en recursos valiosos."
-  },
-  {
-    icon: FlaskConical,
-    title: "Tecnología RMO®",
-    description: "Utilizamos nuestro proceso de radiólisis fotónica focalizada patentado."
-  },
-  {
-    icon: Bolt,
-    title: "Energía Limpia",
-    description: "Generamos combustibles ecológicos que reducen la huella de carbono."
-  },
-  {
-    icon: Factory,
-    title: "Productos Sostenibles",
-    description: "Creamos aceites ecológicos, carbón y gas a partir de materiales reciclados."
   }
 ];
 
