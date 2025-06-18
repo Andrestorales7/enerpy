@@ -91,7 +91,7 @@ const TechnologySection = () => {
                     </div>
                   </div>
                   <img 
-                    src="/images/reactor.jpg"
+                    src="/images/rmo.png"
                     alt="Reactor RMO"
                     className="w-full h-full object-cover"
                   />
