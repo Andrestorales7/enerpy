@@ -98,76 +98,67 @@ const WhatWeDoSection = () => {
 
         {/* Process Visualization */}
         <div className="mt-16 max-w-4xl mx-auto animated-section">
-          <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
-            <h3 className="text-2xl font-bold mb-4 text-center">Ciclo de Transformación</h3>
-            <p className="text-lg text-enerpy-gray mb-6 text-center">
-              Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales.
-            </p>
-            
-            {/* Circular Process Visualization */}
-            <div className="relative w-72 h-72 mx-auto my-8">
-              {/* Circle background */}
-              <div className="absolute inset-0 rounded-full border-4 border-dashed border-enerpy-light/50"></div>
-              
-              {/* Process steps positioned in a circle */}
-              {processSteps.map((step, index) => {
-                // Calculate position on circle
-                const angle = (Math.PI * 2 * index) / processSteps.length - Math.PI / 2;
-                const x = Math.cos(angle) * 120 + 144;
-                const y = Math.sin(angle) * 120 + 144;
-                
-                const isActive = index === activeStep;
-                const Icon = step.icon;
-                
-                return (
-                  <div 
-                    key={index}
-                    className={`absolute transition-all duration-500 ${isActive ? 'scale-110' : 'scale-100'}`}
-                    style={{ 
-                      left: `${x}px`, 
-                      top: `${y}px`, 
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                    onClick={() => setActiveStep(index)}
-                  >
-                    <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
-                      isActive ? 'bg-enerpy-primary text-white' : 'bg-white text-enerpy-gray border border-gray-200'
-                    }`}>
-                      <Icon size={24} />
-                    </div>
-                  </div>
-                );
-              })}
-              
-              {/* Active step description in center */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="bg-white rounded-full w-32 h-32 flex items-center justify-center shadow-md">
-                  <div className="text-center px-2">
-                    <div className="w-6 h-6 rounded-full bg-enerpy-primary text-white flex items-center justify-center mx-auto mb-1">
-                      {activeStep + 1}
-                    </div>
-                    <p className="text-xs font-medium text-enerpy-dark leading-tight">
-                      {processSteps[activeStep].text}
-                    </p>
+          <h3 className="text-2xl font-bold mb-4 text-center">Ciclo de Transformación</h3>
+          <p className="text-lg text-enerpy-gray mb-6 text-center">
+            Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales.
+          </p>
+          {/* Circular Process Visualization - Original */}
+          <div className="relative w-72 h-72 mx-auto my-8">
+            {/* Circle background */}
+            <div className="absolute inset-0 rounded-full border-4 border-dashed border-enerpy-light/50"></div>
+            {/* Process steps positioned in a circle */}
+            {processSteps.map((step, index) => {
+              // Calculate position on circle
+              const angle = (Math.PI * 2 * index) / processSteps.length - Math.PI / 2;
+              const x = Math.cos(angle) * 120 + 144;
+              const y = Math.sin(angle) * 120 + 144;
+              const isActive = index === activeStep;
+              const Icon = step.icon;
+              return (
+                <div 
+                  key={index}
+                  className={`absolute transition-all duration-500 ${isActive ? 'scale-110' : 'scale-100'}`}
+                  style={{ 
+                    left: `${x}px`, 
+                    top: `${y}px`, 
+                    transform: 'translate(-50%, -50%)'
+                  }}
+                  onClick={() => setActiveStep(index)}
+                >
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
+                    isActive ? 'bg-enerpy-primary text-white' : 'bg-white text-enerpy-gray border border-gray-200'
+                  }`}>
+                    <Icon size={24} />
                   </div>
                 </div>
-              </div>
-              
-              {/* Rotating indicator */}
-              <div 
-                className="absolute inset-0 transition-transform duration-1000 ease-in-out"
-                style={{ transform: `rotate(${activeStep * 90}deg)` }}
-              >
-                <div className="w-3 h-3 bg-enerpy-primary rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-                <div className="w-1 h-36 bg-enerpy-primary/20 absolute top-0 left-1/2 transform -translate-x-1/2 origin-bottom"></div>
+              );
+            })}
+            {/* Active step description in center */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="bg-white rounded-full w-32 h-32 flex items-center justify-center shadow-md">
+                <div className="text-center px-2">
+                  <div className="w-6 h-6 rounded-full bg-enerpy-primary text-white flex items-center justify-center mx-auto mb-1">
+                    {activeStep + 1}
+                  </div>
+                  <p className="text-xs font-medium text-enerpy-dark leading-tight">
+                    {processSteps[activeStep].text}
+                  </p>
+                </div>
               </div>
             </div>
-            
-            {/* Step description below the circle */}
-            <div className="text-center mt-8 h-16">
-              <h4 className="font-bold text-enerpy-primary">{processSteps[activeStep].title}</h4>
-              <p className="text-enerpy-gray text-sm mt-1">{processSteps[activeStep].description}</p>
+            {/* Rotating indicator */}
+            <div 
+              className="absolute inset-0 transition-transform duration-1000 ease-in-out"
+              style={{ transform: `rotate(${activeStep * 90}deg)` }}
+            >
+              <div className="w-3 h-3 bg-enerpy-primary rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+              <div className="w-1 h-36 bg-enerpy-primary/20 absolute top-0 left-1/2 transform -translate-x-1/2 origin-bottom"></div>
             </div>
+          </div>
+          {/* Step description below the circle */}
+          <div className="text-center mt-8 h-16">
+            <h4 className="font-bold text-enerpy-primary">{processSteps[activeStep].title}</h4>
+            <p className="text-enerpy-gray text-sm mt-1">{processSteps[activeStep].description}</p>
           </div>
         </div>
       </div>
