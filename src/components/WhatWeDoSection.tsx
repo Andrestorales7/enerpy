@@ -39,7 +39,7 @@ const WhatWeDoSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">¿Qué Hacemos?</h2>
           <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
           <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
-            En ENERPY transformamos residuos en soluciones energéticas sostenibles a través de nuestra tecnología innovadora y patentada.
+            Enerpy trasnforma residuos en materiales, que son materia prima para la industria quimica y soluciones energeticas sostenibles.
           </p>
         </div>
 
