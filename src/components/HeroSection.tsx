@@ -94,7 +94,7 @@ const HeroSection = () => {
           </p>
           <a 
             href="#que-hacemos"
-            className="inline-block px-8 py-4 bg-enerpy-primary hover:bg-enerpy-dark text-white rounded-md transition-all duration-300 text-lg font-medium shadow-lg hover:shadow-xl opacity-0 translate-y-10 transition-all duration-1000 delay-700 hero-animate"
+            className="inline-block px-8 py-4 bg-enerpy-primary hover:bg-enerpy-dark text-white rounded-md text-lg font-medium shadow-lg hover:shadow-xl opacity-0 translate-y-10 transition-all duration-1000 delay-700 hero-animate"
           >
             Descubre cómo revolucionamos la energía
           </a>
