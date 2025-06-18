@@ -113,7 +113,7 @@ const TimelineEvent = ({
 
 const timelineEvents = [
   {
-    year: "2010",
+    year: "2008",
     title: "Fundación de Enerpy",
     description: "La empresa fue fundada por un equipo de científicos e ingenieros comprometidos con la innovación sostenible."
   },
