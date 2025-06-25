@@ -173,7 +173,7 @@ const WhatWeDoSection = () => {
           playsInline
           className="w-full h-full object-cover"
         >
-          <source src="/images/nowaves.mp4" type="video/mp4" />
+          <source src="/images/videobackground.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 flex items-center justify-center z-20">
           <div className="text-center text-white">
