@@ -87,7 +87,7 @@ const WhatWeDoSection = () => {
           {/* Right: Image */}
           <div className="flex-1 min-h-[320px] lg:min-h-[480px] relative rounded-b-3xl lg:rounded-r-3xl lg:rounded-bl-none overflow-hidden">
             <img 
-              src="/images/nature-background.jpg" 
+              src="/images/recycle.jpg" 
               alt="Naturaleza" 
               className="w-full h-full object-cover object-center" 
               style={{ minHeight: 240 }}
