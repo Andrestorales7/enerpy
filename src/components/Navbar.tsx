@@ -39,7 +39,6 @@ const Navbar = () => {
           <NavItem label="Inicio" to="/" isScrolled={isScrolled} />
           <NavItem label="¿Qué Hacemos?" to="/que-hacemos" isScrolled={isScrolled} />
           <NavItem label="Tecnología RMO®" to="/tecnologia" isScrolled={isScrolled} />
-          <NavItem label="Impacto" to="/impacto" isScrolled={isScrolled} />
           <NavItem label="Historia" to="/historia" isScrolled={isScrolled} />
           <NavItem label="Contribuir" to="/contribuir" isScrolled={isScrolled} />
           <Link 
@@ -71,7 +70,6 @@ const Navbar = () => {
             <MobileNavItem label="Inicio" to="/" onClick={() => setIsMenuOpen(false)} />
             <MobileNavItem label="¿Qué Hacemos?" to="/que-hacemos" onClick={() => setIsMenuOpen(false)} />
             <MobileNavItem label="Tecnología RMO®" to="/tecnologia" onClick={() => setIsMenuOpen(false)} />
-            <MobileNavItem label="Impacto" to="/impacto" onClick={() => setIsMenuOpen(false)} />
             <MobileNavItem label="Historia" to="/historia" onClick={() => setIsMenuOpen(false)} />
             <MobileNavItem label="Contribuir" to="/contribuir" onClick={() => setIsMenuOpen(false)} />
             <Link 
