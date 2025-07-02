@@ -5,7 +5,6 @@ import WhatWeDoSection from '@/components/WhatWeDoSection';
 import TechnologySection from '@/components/TechnologySection';
 import EnvironmentalImpactSection from '@/components/EnvironmentalImpactSection';
 import ProductsSection from '@/components/ProductsSection';
-import HistorySection from '@/components/HistorySection';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import AnimationHandler from '@/components/AnimationHandler';
@@ -41,7 +40,6 @@ const Index = () => {
         <TechnologySection />
         <EnvironmentalImpactSection />
         <ProductsSection />
-        <HistorySection />
       </main>
       <Footer />
       <ScrollToTop />
