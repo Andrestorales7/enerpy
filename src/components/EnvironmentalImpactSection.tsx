@@ -44,7 +44,7 @@ const EnvironmentalImpactSection = () => {
         {/* Imagen dominante */}
         <div className="w-full lg:w-[60vw] h-[420px] lg:h-[520px] relative flex-shrink-0">
           <img 
-            src="/images/arbol.jpg" 
+            src="/images/text-behind-image.png" 
             alt="Impacto Ambiental" 
             className="w-full h-full object-cover object-center"
             style={{ minHeight: 240 }}
