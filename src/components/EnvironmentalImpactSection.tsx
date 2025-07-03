@@ -35,7 +35,7 @@ const EnvironmentalImpactSection = () => {
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Impacto Ambiental</h2>
         <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
         <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
-          Nuestra misión es crear un futuro más sostenible, contribuyendo activamente a la solución de los problemas ambientales más apremiantes.
+          Nuestra misión es crear un futuro mucho más sostenible, contribuyendo activamente a la solución de los problemas ambientales más apremiantes.
         </p>
       </div>
 
