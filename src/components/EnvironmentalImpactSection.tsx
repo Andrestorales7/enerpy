@@ -62,7 +62,7 @@ const EnvironmentalImpactSection = () => {
               <div className="flex-1 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center">
                 <Leaf className="w-8 h-8 text-enerpy-primary mb-2" />
                 <h4 className="font-bold mb-1 text-center">Reducción de CO2</h4>
-                <p className="text-sm text-enerpy-gray text-center">Disminución significativa de emisiones de gases de efecto invernadero</p>
+                <p className="text-sm text-enerpy-gray text-center">Disminución mas significativa de emisiones de gases de efecto invernadero</p>
               </div>
               <div className="flex-1 bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center">
                 <Recycle className="w-8 h-8 text-enerpy-primary mb-2" />
