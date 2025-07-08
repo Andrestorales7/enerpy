@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Recycle, FlaskConical, Bolt, Factory, ArrowRight, CheckCircle, Leaf } from 'lucide-react';
 
 const WhatWeDoSection = () => {
@@ -97,70 +97,7 @@ const WhatWeDoSection = () => {
         </section>
 
         {/* Process Visualization */}
-        <div className="mt-16 max-w-4xl mx-auto animated-section">
-          <h3 className="text-2xl font-bold mb-4 text-center">Ciclo de Transformación</h3>
-          <p className="text-lg text-enerpy-gray mb-6 text-center">
-            Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales.
-          </p>
-          {/* Circular Process Visualization - Original */}
-          <div className="relative w-72 h-72 mx-auto my-8">
-            {/* Circle background */}
-            <div className="absolute inset-0 rounded-full border-4 border-dashed border-enerpy-light/50"></div>
-            {/* Process steps positioned in a circle */}
-            {processSteps.map((step, index) => {
-              // Calculate position on circle
-              const angle = (Math.PI * 2 * index) / processSteps.length - Math.PI / 2;
-              const x = Math.cos(angle) * 120 + 144;
-              const y = Math.sin(angle) * 120 + 144;
-              const isActive = index === activeStep;
-              const Icon = step.icon;
-              return (
-                <div 
-                  key={index}
-                  className={`absolute transition-all duration-500 ${isActive ? 'scale-110' : 'scale-100'}`}
-                  style={{ 
-                    left: `${x}px`, 
-                    top: `${y}px`, 
-                    transform: 'translate(-50%, -50%)'
-                  }}
-                  onClick={() => setActiveStep(index)}
-                >
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 ${
-                    isActive ? 'bg-enerpy-primary text-white' : 'bg-white text-enerpy-gray border border-gray-200'
-                  }`}>
-                    <Icon size={24} />
-                  </div>
-                </div>
-              );
-            })}
-            {/* Active step description in center */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="bg-white rounded-full w-32 h-32 flex items-center justify-center shadow-md">
-                <div className="text-center px-2">
-                  <div className="w-6 h-6 rounded-full bg-enerpy-primary text-white flex items-center justify-center mx-auto mb-1">
-                    {activeStep + 1}
-                  </div>
-                  <p className="text-xs font-medium text-enerpy-dark leading-tight">
-                    {processSteps[activeStep].text}
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* Rotating indicator */}
-            <div 
-              className="absolute inset-0 transition-transform duration-1000 ease-in-out"
-              style={{ transform: `rotate(${activeStep * 90}deg)` }}
-            >
-              <div className="w-3 h-3 bg-enerpy-primary rounded-full absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-              <div className="w-1 h-36 bg-enerpy-primary/20 absolute top-0 left-1/2 transform -translate-x-1/2 origin-bottom"></div>
-            </div>
-          </div>
-          {/* Step description below the circle */}
-          <div className="text-center mt-8 h-16">
-            <h4 className="font-bold text-enerpy-primary">{processSteps[activeStep].title}</h4>
-            <p className="text-enerpy-gray text-sm mt-1">{processSteps[activeStep].description}</p>
-          </div>
-        </div>
+        <CicloTransformacionSection />
       </div>
 
       {/* Video Section */}
@@ -273,5 +210,130 @@ const processSteps = [
     description: "Obtención de aceites ecológicos, carbón y gas con múltiples aplicaciones."
   }
 ];
+
+const CIRCLE_SIZE = 480; // px
+const CENTER = CIRCLE_SIZE / 2;
+const RADIUS = 180;
+const ICON_SIZE = 56;
+const CENTER_SIZE = 180;
+const HAND_LENGTH = 170;
+const HAND_WIDTH = 8;
+const DOT_SIZE = 18;
+const ANIMATION_SPEED = 0.005; // radianes por frame (más suave y lento)
+
+function getActiveStepFromAngle(angle) {
+  // 4 steps, starting at -90deg (top)
+  const normalized = ((angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+  const step = Math.floor((normalized + Math.PI / 4) / (Math.PI / 2)) % 4;
+  return step;
+}
+
+function CicloTransformacionSection() {
+  const [angle, setAngle] = useState(0);
+  const requestRef = useRef<number>();
+
+  useEffect(() => {
+    const animate = () => {
+      setAngle((prev) => prev + ANIMATION_SPEED);
+      requestRef.current = requestAnimationFrame(animate);
+    };
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []);
+
+  return (
+    <div className="mt-16 max-w-6xl mx-auto animated-section">
+      <div className="bg-green-100 rounded-3xl py-16 px-4 md:px-16 shadow-xl">
+        <h3 className="text-4xl md:text-5xl font-extrabold mb-8 text-center text-emerald-900 drop-shadow-lg">Ciclo de Transformación</h3>
+        <p className="text-2xl md:text-3xl text-emerpy-gray mb-10 text-center max-w-3xl mx-auto font-medium">
+          Nuestro innovador proceso convierte diferentes tipos de residuos en productos útiles y sostenibles, cerrando el ciclo de vida de los materiales.
+        </p>
+        <CicloTransformacionVisual angle={angle} />
+        <div className="text-center mt-12 min-h-[4.5rem]">
+          <h4 className="font-extrabold text-3xl md:text-4xl text-emerpy-primary mb-2">{processSteps[getActiveStepFromAngle(angle)].title}</h4>
+          <p className="text-emerpy-gray text-lg md:text-xl mt-1 font-medium">{processSteps[getActiveStepFromAngle(angle)].description}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CicloTransformacionVisual({ angle }: { angle: number }) {
+  // Posiciones de los pasos
+  const stepPositions = processSteps.map((_, i) => {
+    const a = (Math.PI * 2 * i) / processSteps.length - Math.PI / 2;
+    return {
+      x: Math.cos(a) * RADIUS + CENTER,
+      y: Math.sin(a) * RADIUS + CENTER,
+      angle: a,
+    };
+  });
+
+  // Manecilla
+  const handAngle = ((angle % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+  const activeStep = getActiveStepFromAngle(angle);
+
+  return (
+    <div className="relative mx-auto my-12" style={{ width: CIRCLE_SIZE, height: CIRCLE_SIZE }}>
+      {/* Círculo base */}
+      <div className="absolute inset-0 rounded-full border-[10px] border-dashed border-emerpy-primary/30 shadow-2xl"></div>
+      {/* Pasos en círculo */}
+      {stepPositions.map((pos, i) => {
+        const Icon = processSteps[i].icon;
+        const isActive = i === activeStep;
+        return (
+          <div
+            key={i}
+            className={`absolute flex flex-col items-center justify-center transition-all duration-300 ${isActive ? 'scale-125 z-20' : 'scale-100 z-10'}`}
+            style={{
+              left: pos.x,
+              top: pos.y,
+              transform: `translate(-50%, -50%)`,
+            }}
+          >
+            <div className={`rounded-full flex items-center justify-center shadow-lg border-4 ${isActive ? 'bg-emerpy-primary text-white border-emerpy-dark' : 'bg-white text-emerpy-primary border-emerpy-primary/30'} transition-all duration-300`} style={{ width: ICON_SIZE, height: ICON_SIZE }}>
+              <Icon size={32} />
+            </div>
+            <span className={`mt-3 text-lg md:text-2xl font-bold ${isActive ? 'text-emerpy-dark' : 'text-emerpy-primary/70'} drop-shadow`}>{processSteps[i].title}</span>
+          </div>
+        );
+      })}
+      {/* Centro */}
+      <div className="absolute flex items-center justify-center bg-white rounded-full shadow-2xl border-4 border-emerpy-primary/40" style={{ left: CENTER, top: CENTER, width: CENTER_SIZE, height: CENTER_SIZE, transform: 'translate(-50%, -50%)' }}>
+        <div className="text-center px-2">
+          <div className="w-12 h-12 rounded-full bg-emerpy-primary text-white flex items-center justify-center mx-auto mb-2 text-3xl font-extrabold shadow-lg">{activeStep + 1}</div>
+          <p className="text-xl font-bold text-emerpy-dark leading-tight">{processSteps[activeStep].text}</p>
+        </div>
+      </div>
+      {/* Manecilla */}
+      <div
+        className="absolute left-1/2 top-1/2 origin-bottom"
+        style={{
+          width: HAND_WIDTH,
+          height: HAND_LENGTH,
+          transform: `translate(-50%, -100%) rotate(${(handAngle * 180) / Math.PI / 2}deg)`
+        }}
+      >
+        <div className="w-full h-full bg-emerpy-primary rounded-b-full shadow-lg"></div>
+        <div className="absolute left-1/2 top-0 w-6 h-6 bg-emerpy-primary rounded-full -translate-x-1/2 -translate-y-1/2 border-4 border-white"></div>
+      </div>
+      {/* Puntos en el círculo */}
+      {stepPositions.map((pos, i) => (
+        <div
+          key={i + 'dot'}
+          className="absolute bg-emerpy-primary/80 border-4 border-white rounded-full shadow"
+          style={{
+            left: pos.x,
+            top: pos.y,
+            width: DOT_SIZE,
+            height: DOT_SIZE,
+            transform: 'translate(-50%, -50%)',
+            zIndex: 5,
+          }}
+        ></div>
+      ))}
+    </div>
+  );
+}
 
 export default WhatWeDoSection;
