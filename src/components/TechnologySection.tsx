@@ -35,13 +35,6 @@ const TechnologySection = () => {
 
   return (
     <section id="tecnologia" className="py-24 bg-gray-50">
-      <div className="text-center mb-16 animated-section">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Tecnología RMO®</h2>
-        <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
-        <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
-          PROCESO DE RADIÓLISIS FOTÓNICA FOCALIZADA DE MATERIALES DE DESECHO
-        </p>
-      </div>
 
       <div className="animated-section">
         <h3 className="text-2xl font-bold mb-3 text-center">Nuestro Reactor Revolucionario</h3>

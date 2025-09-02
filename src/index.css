@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
 
 @tailwind base;
@@ -6,6 +6,17 @@
 @tailwind utilities;
 
 @layer base {
+  /* Smooth scrolling for the entire document */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Account for fixed navbar */
+  }
+
+  /* Enhanced smooth scrolling for all elements */
+  * {
+    scroll-behavior: smooth;
+  }
+
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -52,5 +63,133 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer components {
+  /* Animation classes for scroll-triggered animations */
+  .animated-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease-out;
+  }
+
+  .animated-section.appear {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero animation classes */
+  .hero-animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+  }
+
+  .hero-animate.opacity-100 {
+    opacity: 1;
+  }
+
+  .hero-animate:not(.translate-y-10) {
+    transform: translateY(0);
+  }
+
+  /* Smooth transitions for interactive elements */
+  .smooth-transition {
+    transition: all 0.3s ease-in-out;
+  }
+
+  /* Enhanced scroll behavior for anchor links */
+  .scroll-smooth {
+    scroll-behavior: smooth;
+  }
+
+  /* Fade in animation keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Animation utility classes */
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  /* Staggered animation delays */
+  .animate-delay-100 {
+    animation-delay: 0.1s;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 0.2s;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 0.3s;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 0.4s;
+  }
+}
+
+@layer utilities {
+  /* Additional smooth scrolling utilities */
+  .scroll-smooth-enhanced {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* 80px for navbar */
+  }
+
+  /* Smooth transitions for page changes */
+  .page-transition {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+
+  /* Parallax scrolling effect (optional) */
+  .parallax {
+    will-change: transform;
+    transition: transform 0.1s ease-out;
+  }
+
+  /* Reduce motion for users who prefer it */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    
+    .animated-section,
+    .hero-animate,
+    .smooth-transition,
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Enhanced focus styles for keyboard navigation */
+  .focus-smooth:focus {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    transition: outline-offset 0.2s ease;
   }
 }

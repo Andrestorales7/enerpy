@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Leaf, Globe, TreeDeciduous, Recycle } from 'lucide-react';
 import StatCard from './StatCard';
 
@@ -21,6 +21,30 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
     treesPlanted: 15000,
     projectsImplemented: 24
   };
+
+  const startCounting = useCallback(() => {
+    const duration = 2000; // ms
+    const steps = 60;
+    const interval = duration / steps;
+
+    let step = 0;
+
+    const timer = setInterval(() => {
+      step++;
+      const progress = step / steps;
+      
+      setCounts({
+        tonsRecycled: Math.floor(progress * targets.tonsRecycled),
+        co2Reduced: Math.floor(progress * targets.co2Reduced),
+        treesPlanted: Math.floor(progress * targets.treesPlanted),
+        projectsImplemented: Math.floor(progress * targets.projectsImplemented)
+      });
+
+      if (step === steps) {
+        clearInterval(timer);
+      }
+    }, interval);
+  }, [targets]);
 
   useEffect(() => {
     // Create an IntersectionObserver to trigger counting when in view
@@ -51,31 +75,7 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
         observer.unobserve(statsElement);
       }
     };
-  }, [onStartCounting]);
-
-  const startCounting = () => {
-    const duration = 2000; // ms
-    const steps = 60;
-    const interval = duration / steps;
-
-    let step = 0;
-
-    const timer = setInterval(() => {
-      step++;
-      const progress = step / steps;
-      
-      setCounts({
-        tonsRecycled: Math.floor(progress * targets.tonsRecycled),
-        co2Reduced: Math.floor(progress * targets.co2Reduced),
-        treesPlanted: Math.floor(progress * targets.treesPlanted),
-        projectsImplemented: Math.floor(progress * targets.projectsImplemented)
-      });
-
-      if (step === steps) {
-        clearInterval(timer);
-      }
-    }, interval);
-  };
+  }, [onStartCounting, startCounting]);
 
   return (
     <div id="environmental-stats" className="animated-section">
