@@ -15,14 +15,19 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
     projectsImplemented: 0
   });
 
+  const [hasAnimated, setHasAnimated] = useState(false);
+
   const targets = {
-    tonsRecycled: 12500,
-    co2Reduced: 6800,
-    treesPlanted: 15000,
-    projectsImplemented: 24
+    tonsRecycled: 3333,
+    co2Reduced: 1813,
+    treesPlanted: 4000,
+    projectsImplemented: 6
   };
 
   const startCounting = useCallback(() => {
+    if (hasAnimated) return; // Evita que se ejecute múltiples veces
+    
+    setHasAnimated(true);
     const duration = 2000; // ms
     const steps = 60;
     const interval = duration / steps;
@@ -44,14 +49,14 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
         clearInterval(timer);
       }
     }, interval);
-  }, [targets]);
+  }, [targets, hasAnimated]);
 
   useEffect(() => {
     // Create an IntersectionObserver to trigger counting when in view
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting && !hasAnimated) {
             entry.target.classList.add('appear');
             startCounting();
             if (onStartCounting) {
@@ -75,7 +80,7 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
         observer.unobserve(statsElement);
       }
     };
-  }, [onStartCounting, startCounting]);
+  }, [onStartCounting, startCounting, hasAnimated]);
 
   return (
     <div id="environmental-stats" className="animated-section">
