@@ -1,207 +1,193 @@
-import React, { useRef, useEffect, useState } from 'react';
+'use client';
+
+import { ElementType, useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText as GSAPSplitText } from 'gsap/SplitText';
-import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(ScrollTrigger, GSAPSplitText, useGSAP);
-
-export interface SplitTextProps {
-  text: string;
+interface TextTypeProps {
   className?: string;
-  delay?: number;
-  duration?: number;
-  ease?: string | ((t: number) => number);
-  splitType?: 'chars' | 'words' | 'lines' | 'words, chars';
-  from?: gsap.TweenVars;
-  to?: gsap.TweenVars;
-  threshold?: number;
-  rootMargin?: string;
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span';
-  textAlign?: React.CSSProperties['textAlign'];
-  onLetterAnimationComplete?: () => void;
+  showCursor?: boolean;
+  hideCursorWhileTyping?: boolean;
+  cursorCharacter?: string | React.ReactNode;
+  cursorBlinkDuration?: number;
+  cursorClassName?: string;
+  text: string | string[];
+  as?: ElementType;
+  typingSpeed?: number;
+  initialDelay?: number;
+  pauseDuration?: number;
+  deletingSpeed?: number;
+  loop?: boolean;
+  textColors?: string[];
+  variableSpeed?: { min: number; max: number };
+  onSentenceComplete?: (sentence: string, index: number) => void;
+  startOnVisible?: boolean;
+  reverseMode?: boolean;
 }
 
-const SplitText: React.FC<SplitTextProps> = ({
+const TextType = ({
   text,
+  as: Component = 'div',
+  typingSpeed = 50,
+  initialDelay = 0,
+  pauseDuration = 2000,
+  deletingSpeed = 30,
+  loop = true,
   className = '',
-  delay = 100,
-  duration = 0.6,
-  ease = 'power3.out',
-  splitType = 'chars',
-  from = { opacity: 0, y: 40 },
-  to = { opacity: 1, y: 0 },
-  threshold = 0.1,
-  rootMargin = '-100px',
-  tag = 'p',
-  textAlign = 'center',
-  onLetterAnimationComplete
-}) => {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const animationCompletedRef = useRef(false);
-  const [fontsLoaded, setFontsLoaded] = useState<boolean>(false);
+  showCursor = true,
+  hideCursorWhileTyping = false,
+  cursorCharacter = '|',
+  cursorClassName = '',
+  cursorBlinkDuration = 0.5,
+  textColors = [],
+  variableSpeed,
+  onSentenceComplete,
+  startOnVisible = false,
+  reverseMode = false,
+  ...props
+}: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
+  const [displayedText, setDisplayedText] = useState('');
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(!startOnVisible);
+  const cursorRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
-  useEffect(() => {
-    if (document.fonts.status === 'loaded') {
-      setFontsLoaded(true);
-    } else {
-      document.fonts.ready.then(() => {
-        setFontsLoaded(true);
-      });
-    }
-  }, []);
+  const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
-  useGSAP(
-    () => {
-      if (!ref.current || !text || !fontsLoaded) return;
-      const el = ref.current as HTMLElement & {
-        _rbsplitInstance?: GSAPSplitText;
-      };
+  const getRandomSpeed = useCallback(() => {
+    if (!variableSpeed) return typingSpeed;
+    const { min, max } = variableSpeed;
+    return Math.random() * (max - min) + min;
+  }, [variableSpeed, typingSpeed]);
 
-      if (el._rbsplitInstance) {
-        try {
-          el._rbsplitInstance.revert();
-        } catch (_) {}
-        delete el._rbsplitInstance;
-      }
-
-      const startPct = (1 - threshold) * 100;
-      const marginMatch = /^(-?\d+(?:\.\d+)?)(px|em|rem|%)?$/.exec(rootMargin);
-      const marginValue = marginMatch ? parseFloat(marginMatch[1]) : 0;
-      const marginUnit = marginMatch ? marginMatch[2] || 'px' : 'px';
-      const sign =
-        marginValue === 0
-          ? ''
-          : marginValue < 0
-            ? `-=${Math.abs(marginValue)}${marginUnit}`
-            : `+=${marginValue}${marginUnit}`;
-      const start = `top ${startPct}%${sign}`;
-      let targets: Element[] = [];
-      const assignTargets = (self: GSAPSplitText) => {
-        if (splitType.includes('chars') && (self as GSAPSplitText).chars?.length)
-          targets = (self as GSAPSplitText).chars;
-        if (!targets.length && splitType.includes('words') && self.words.length) targets = self.words;
-        if (!targets.length && splitType.includes('lines') && self.lines.length) targets = self.lines;
-        if (!targets.length) targets = self.chars || self.words || self.lines;
-      };
-      const splitInstance = new GSAPSplitText(el, {
-        type: splitType,
-        smartWrap: true,
-        autoSplit: splitType === 'lines',
-        linesClass: 'split-line',
-        wordsClass: 'split-word',
-        charsClass: 'split-char',
-        reduceWhiteSpace: false,
-        onSplit: (self: GSAPSplitText) => {
-          assignTargets(self);
-          return gsap.fromTo(
-            targets,
-            { ...from },
-            {
-              ...to,
-              duration,
-              ease,
-              stagger: delay / 1000,
-              scrollTrigger: {
-                trigger: el,
-                start,
-                once: true,
-                fastScrollEnd: true,
-                anticipatePin: 0.4
-              },
-              onComplete: () => {
-                animationCompletedRef.current = true;
-                onLetterAnimationComplete?.();
-              },
-              willChange: 'transform, opacity',
-              force3D: true
-            }
-          );
-        }
-      });
-      el._rbsplitInstance = splitInstance;
-      return () => {
-        ScrollTrigger.getAll().forEach(st => {
-          if (st.trigger === el) st.kill();
-        });
-        try {
-          splitInstance.revert();
-        } catch (_) {}
-        delete el._rbsplitInstance;
-      };
-    },
-    {
-      dependencies: [
-        text,
-        delay,
-        duration,
-        ease,
-        splitType,
-        JSON.stringify(from),
-        JSON.stringify(to),
-        threshold,
-        rootMargin,
-        fontsLoaded,
-        onLetterAnimationComplete
-      ],
-      scope: ref
-    }
-  );
-
-  const renderTag = () => {
-    const style: React.CSSProperties = {
-      textAlign,
-      wordWrap: 'break-word',
-      willChange: 'transform, opacity'
-    };
-    const classes = `split-parent overflow-hidden inline-block whitespace-normal ${className}`;
-    switch (tag) {
-      case 'h1':
-        return (
-          <h1 ref={ref} style={style} className={classes}>
-            {text}
-          </h1>
-        );
-      case 'h2':
-        return (
-          <h2 ref={ref} style={style} className={classes}>
-            {text}
-          </h2>
-        );
-      case 'h3':
-        return (
-          <h3 ref={ref} style={style} className={classes}>
-            {text}
-          </h3>
-        );
-      case 'h4':
-        return (
-          <h4 ref={ref} style={style} className={classes}>
-            {text}
-          </h4>
-        );
-      case 'h5':
-        return (
-          <h5 ref={ref} style={style} className={classes}>
-            {text}
-          </h5>
-        );
-      case 'h6':
-        return (
-          <h6 ref={ref} style={style} className={classes}>
-            {text}
-          </h6>
-        );
-      default:
-        return (
-          <p ref={ref} style={style} className={classes}>
-            {text}
-          </p>
-        );
-    }
+  const getCurrentTextColor = () => {
+    if (textColors.length === 0) return '#ffffff';
+    return textColors[currentTextIndex % textColors.length];
   };
 
-  return renderTag();
+  useEffect(() => {
+    if (!startOnVisible || !containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setIsVisible(true);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, [startOnVisible]);
+
+  useEffect(() => {
+    if (showCursor && cursorRef.current) {
+      gsap.set(cursorRef.current, { opacity: 1 });
+      gsap.to(cursorRef.current, {
+        opacity: 0,
+        duration: cursorBlinkDuration,
+        repeat: -1,
+        yoyo: true,
+        ease: 'power2.inOut'
+      });
+    }
+  }, [showCursor, cursorBlinkDuration]);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let timeout: NodeJS.Timeout;
+
+    const currentText = textArray[currentTextIndex];
+    const processedText = reverseMode ? currentText.split('').reverse().join('') : currentText;
+
+    const executeTypingAnimation = () => {
+      if (isDeleting) {
+        if (displayedText === '') {
+          setIsDeleting(false);
+          if (currentTextIndex === textArray.length - 1 && !loop) {
+            return;
+          }
+
+          if (onSentenceComplete) {
+            onSentenceComplete(textArray[currentTextIndex], currentTextIndex);
+          }
+
+          setCurrentTextIndex(prev => (prev + 1) % textArray.length);
+          setCurrentCharIndex(0);
+          timeout = setTimeout(() => {}, pauseDuration);
+        } else {
+          timeout = setTimeout(() => {
+            setDisplayedText(prev => prev.slice(0, -1));
+          }, deletingSpeed);
+        }
+      } else {
+        if (currentCharIndex < processedText.length) {
+          timeout = setTimeout(
+            () => {
+              setDisplayedText(prev => prev + processedText[currentCharIndex]);
+              setCurrentCharIndex(prev => prev + 1);
+            },
+            variableSpeed ? getRandomSpeed() : typingSpeed
+          );
+        } else if (textArray.length > 1) {
+          timeout = setTimeout(() => {
+            setIsDeleting(true);
+          }, pauseDuration);
+        }
+      }
+    };
+
+    if (currentCharIndex === 0 && !isDeleting && displayedText === '') {
+      timeout = setTimeout(executeTypingAnimation, initialDelay);
+    } else {
+      executeTypingAnimation();
+    }
+
+    return () => clearTimeout(timeout);
+  }, [
+    currentCharIndex,
+    displayedText,
+    isDeleting,
+    typingSpeed,
+    deletingSpeed,
+    pauseDuration,
+    textArray,
+    currentTextIndex,
+    loop,
+    initialDelay,
+    isVisible,
+    reverseMode,
+    variableSpeed,
+    onSentenceComplete
+  ]);
+
+  const shouldHideCursor =
+    hideCursorWhileTyping && (currentCharIndex < textArray[currentTextIndex].length || isDeleting);
+
+  return createElement(
+    Component,
+    {
+      ref: containerRef,
+      className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
+      ...props
+    },
+    <span className="inline" style={{ color: getCurrentTextColor() }}>
+      {displayedText}
+    </span>,
+    showCursor && (
+      <span
+        ref={cursorRef}
+        className={`ml-1 inline-block opacity-100 ${shouldHideCursor ? 'hidden' : ''} ${cursorClassName}`}
+      >
+        {cursorCharacter}
+      </span>
+    )
+  );
 };
 
 const MainHero = () => {
@@ -213,18 +199,38 @@ const MainHero = () => {
       {/* Content overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center text-white px-6">
-          <SplitText
+          <TextType
             text="BIENVENIDO A ENERPY"
-            tag="h1"
-            splitType="chars"
-            duration={0.8}
-            delay={50}
-            ease="power4.out"
+            as="h1"
+            typingSpeed={100}
+            initialDelay={500}
+            pauseDuration={3000}
+            deletingSpeed={50}
+            loop={true}
+            showCursor={true}
+            cursorCharacter="|"
+            cursorBlinkDuration={0.7}
+            startOnVisible={true}
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 drop-shadow-lg"
+            textColors={['#ffffff']}
           />
-          <p className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto leading-relaxed drop-shadow-md mt-6">
-            Descubre cómo estamos transformando el futuro de la energía sostenible
-          </p>
+          <div className="mt-6">
+            <TextType
+              text="Descubre cómo estamos transformando el futuro de la energía sostenible"
+              as="p"
+              typingSpeed={60}
+              initialDelay={2000}
+              pauseDuration={4000}
+              deletingSpeed={30}
+              loop={true}
+              showCursor={true}
+              cursorCharacter="_"
+              cursorBlinkDuration={0.5}
+              startOnVisible={true}
+              className="text-lg md:text-xl opacity-90 max-w-2xl mx-auto leading-relaxed drop-shadow-md"
+              textColors={['#ffffff']}
+            />
+          </div>
           <div className="mt-6 flex items-center justify-center space-x-3">
             <div className="w-2 h-2 bg-green-300 rounded-full animate-pulse" />
             <div className="w-3 h-1 bg-green-300 rounded-full" />
