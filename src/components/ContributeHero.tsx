@@ -20,7 +20,7 @@ const ContributeHero = () => {
             <span className="text-enerpy-accent">Contribuye</span> al Cambio
           </h1>
           <p className="text-xl md:text-2xl opacity-90 max-w-3xl mx-auto leading-relaxed drop-shadow-md">
-            Únete a nosotros en la misión de crear un futuro más sostenible para las próximas generaciones
+            unete a nosotros en la misión de crear un futuro más sostenible para las próximas generaciones
           </p>
           <div className="mt-8 flex items-center justify-center space-x-4">
             <div className="w-2 h-2 bg-enerpy-accent rounded-full animate-pulse" />
