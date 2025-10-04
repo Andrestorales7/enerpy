@@ -11,8 +11,8 @@ const Technology = () => {
     <div className="min-h-screen">
       <Navbar />
       <TechnologyHero />
-      <TechnologyDetailedSection />
       <ProcessStickyScrollDemo />
+      <TechnologyDetailedSection />
       <Footer />
       <ScrollToTop />
     </div>
