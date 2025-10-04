@@ -195,7 +195,7 @@ const MainHero = () => {
     <div className="relative w-full h-[400px] overflow-hidden bg-gradient-to-br from-green-600 via-green-700 to-green-800">
       {/* Green gradient overlay for depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-green-900/60 via-green-800/30 to-transparent z-10" />
-      
+
       {/* Content overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
         <div className="text-center text-white px-6">
