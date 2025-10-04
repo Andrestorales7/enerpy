@@ -18,10 +18,10 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
   const [hasAnimated, setHasAnimated] = useState(false);
 
   const targets = {
-    tonsRecycled: 3333,
-    co2Reduced: 1813,
-    treesPlanted: 4000,
-    projectsImplemented: 6
+    tonsRecycled: 1000,
+    co2Reduced: 2640,
+    treesPlanted: 337,
+    projectsImplemented: 17
   };
 
   const startCounting = useCallback(() => {
@@ -88,10 +88,10 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
         <h3 className="text-2xl font-bold mb-8 text-center">Nuestro Impacto en Números</h3>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          <StatCard icon={Recycle} value={counts.tonsRecycled} label="Toneladas Recicladas" />
-          <StatCard icon={Leaf} value={counts.co2Reduced} label="Ton. de CO2 Evitadas" />
-          <StatCard icon={TreeDeciduous} value={counts.treesPlanted} label="Árboles Plantados" />
-          <StatCard icon={Globe} value={counts.projectsImplemented} label="Proyectos Implementados" />
+          <StatCard icon={Recycle} value={`+${counts.tonsRecycled}`} label="Toneladas de residuos transformados en materias primas por año" />
+          <StatCard icon={Leaf} value={`+${counts.co2Reduced}`} label="Ton. CO2 capturado por año" />
+          <StatCard icon={TreeDeciduous} value={`+${counts.treesPlanted}`} label="Procesos" />
+          <StatCard icon={Globe} value={counts.projectsImplemented} label="Alineado con los Objetivos de Desarrollo Sostenible" />
         </div>
       </div>
     </div>
