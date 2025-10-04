@@ -1,5 +1,4 @@
 import { Recycle, FlaskConical, Bolt, Factory } from 'lucide-react';
-import TransformationCycle from './TransformationCycle';
 import { OptimizedImage } from './ui/optimized-image';
 
 type ColorFeatureSectionProps = {
@@ -142,8 +141,6 @@ const WhatWeDoSection = () => {
             <div className="absolute inset-0 bg-gradient-to-l from-black/20 via-transparent to-transparent" />
           </div>
         </section>
-
-        <TransformationCycle />
       </div>
     </section>
   );
