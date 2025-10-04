@@ -1,4 +1,5 @@
 import { Flame, Droplets, Zap, Wind } from 'lucide-react';
+import { GradientDots } from '@/components/ui/gradient-dots';
 
 const ProductsSection = () => {
   const products = [
@@ -29,8 +30,15 @@ const ProductsSection = () => {
   ];
 
   return (
-    <section className="py-24 bg-gradient-to-b from-green-50 to-white">
-      <div className="container mx-auto px-4">
+    <section className="relative py-24 overflow-hidden">
+      <GradientDots 
+        duration={20} 
+        backgroundColor="#f0fdf4" 
+        dotSize={6} 
+        spacing={8}
+        colorCycleDuration={8}
+      />
+      <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-16 animated-section">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Productos Obtenidos</h2>
           <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
@@ -72,6 +80,26 @@ const ProductsSection = () => {
           </div>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes gradientShift {
+          0% {
+            background-position: 0px 0px, 4px 6.928px, 0% 0%, 0% 0%, 0% 0%, 0% 6.928px;
+          }
+          100% {
+            background-position: 0px 0px, 4px 6.928px, 400% 300%, 400% 300%, 400% 300%, 400% 6.928px;
+          }
+        }
+        
+        @keyframes colorCycle {
+          0% {
+            filter: hue-rotate(0deg);
+          }
+          100% {
+            filter: hue-rotate(360deg);
+          }
+        }
+      `}</style>
     </section>
   );
 };
