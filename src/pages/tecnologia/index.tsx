@@ -1,4 +1,5 @@
 import TechnologyDetailedSection from "@/components/TechnologyDetailedSection";
+import TechnologyIntroSection from "@/components/TechnologyIntroSection";
 import ProcessStickyScrollDemo from "@/components/ProcessStickyScroll";
 import TechnologyHero from "@/components/TechnologyHero";
 import Footer from "@/components/Footer";
@@ -10,6 +11,7 @@ const Technology = () => {
     <div className="min-h-screen">
       <Navbar />
       <TechnologyHero />
+      <TechnologyIntroSection />
       <ProcessStickyScrollDemo />
       <TechnologyDetailedSection />
       <Footer />
