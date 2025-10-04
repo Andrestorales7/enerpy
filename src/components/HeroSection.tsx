@@ -1,4 +1,4 @@
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 import { useEffect, useState, useCallback } from 'react';
 
 const HeroSection = () => {
@@ -7,16 +7,16 @@ const HeroSection = () => {
 
   const slogans = [
     {
-      text: "Transformando residuos en",
-      highlight: "Energía sostenible"
+      text: "Transformamos residuos en",
+      highlight: "recursos"
     },
     {
-      text: "Sin residuos,",
-      highlight: "no hay contaminación"
+      text: "Una tecnología única que convierte la basura en",
+      highlight: "materia prima y energía"
     },
     {
-      text: "Enerpy",
-      highlight: "tecnología RMO"
+      text: "Acelerando lo que la naturaleza tarda",
+      highlight: "siglos en lograr"
     }
   ];
 
@@ -60,19 +60,33 @@ const HeroSection = () => {
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-end pr-4 md:pr-24 pb-2 md:pb-28">
-        <h1
-          className={`text-2xl sm:text-3x1 md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-1 leading-tight transition-all duration-500 ease-in-out max-w-[90vw] md:max-w-2xl text-right whitespace-normal break-words ${
-            isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
-          }`}
-        >
-          <span className="mr-3 text-white/95">
-            {slogans[currentSlogan].text}
-          </span>
-          <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent drop-shadow-lg">
-            {slogans[currentSlogan].highlight}
-          </span>
-        </h1>
-        
+        <div className="max-w-2xl text-right">
+          <h1
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-500 ease-in-out whitespace-normal break-words ${
+              isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
+            }`}
+          >
+            <span className="mr-3 text-white/95">
+              {slogans[currentSlogan].text}
+            </span>
+            <span className="bg-gradient-to-r from-emerald-400 via-green-400 to-teal-400 bg-clip-text text-transparent drop-shadow-lg">
+              {slogans[currentSlogan].highlight}
+            </span>
+          </h1>
+          
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-end">
+            <button className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center group">
+              Descubre el RMO
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+            
+            <button className="bg-transparent border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:bg-white/10 flex items-center justify-center group">
+              Oportunidades de Inversión
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
