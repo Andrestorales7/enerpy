@@ -56,22 +56,22 @@ export const StickyScroll = ({
   return (
     <div
       style={{ backgroundColor: currentBackground }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10 transition-colors duration-500"
+      className="h-[40rem] overflow-y-auto flex justify-center relative space-x-12 rounded-md p-12 transition-colors duration-500"
       ref={containerRef}
     >
-      <div className="relative flex items-start px-4">
-        <div className="max-w-2xl">
+      <div className="relative flex items-start px-6">
+        <div className="max-w-3xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-20">
+            <div key={item.title + index} className="my-24">
               <h2
-                className={`text-2xl font-bold text-slate-100 transition-opacity duration-300 ${
+                className={`text-4xl font-bold text-white transition-opacity duration-300 ${
                   activeCard === index ? 'opacity-100' : 'opacity-30'
                 }`}
               >
                 {item.title}
               </h2>
               <p
-                className={`text-lg text-slate-300 max-w-sm mt-10 transition-opacity duration-300 ${
+                className={`text-xl text-white max-w-lg mt-8 leading-relaxed transition-opacity duration-300 ${
                   activeCard === index ? 'opacity-100' : 'opacity-30'
                 }`}
               >
@@ -85,7 +85,7 @@ export const StickyScroll = ({
       <div
         style={{ background: currentGradient }}
         className={cn(
-          "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden transition-all duration-500",
+          "hidden lg:block h-80 w-96 rounded-md bg-white sticky top-10 overflow-hidden transition-all duration-500",
           contentClassName
         )}
       >
