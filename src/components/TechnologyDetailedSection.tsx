@@ -18,38 +18,6 @@ const TechnologyDetailedSection = () => {
     { name: 'Gas Ecológico', description: 'Combustible limpio' }
   ];
 
-  const stages = [
-    {
-      title: 'ETAPA 1',
-      steps: [
-        {
-          title: 'Alimentación',
-          description: 'El residuo que recibirá TRATAMIENTO RMO se introduce en los cartuchos o cápsulas de proceso que se tapan herméticamente. Esto permite aislar totalmente el residuo del ambiente.',
-          icon: '1'
-        },
-        {
-          title: 'Proceso',
-          description: 'Se aplica energía radiante al interior de la molécula del material sometido a proceso. Este concentrado flujo de fotones produce la descomposición química del residuo, es decir la radiolisis fotónica.',
-          icon: '1A'
-        }
-      ]
-    },
-    {
-      title: 'ETAPA 2',
-      steps: [
-        {
-          title: 'Precipitadores',
-          description: 'Los precipitadores separan selectivamente los aceites de diferentes densidades y el gas combustible remanente a presión normal y a temperatura ambiente.',
-          icon: '2'
-        },
-        {
-          title: 'Colecta',
-          description: 'Todos los productos son colectados en tanques especiales y nada es arrojado al ambiente. Aceites pesados y asfalto, aceites medios, aceites livianos o ácidos orgánicos y gas.',
-          icon: '3'
-        }
-      ]
-    }
-  ];
 
   return (
     <div className="py-20 bg-gradient-to-b from-green-50 to-white">
@@ -145,33 +113,6 @@ const TechnologyDetailedSection = () => {
           </div>
         </div>
 
-        {/* Cómo funciona - Etapas */}
-        <div className="mb-16">
-          <h3 className="text-3xl font-bold text-center text-enerpy-dark mb-12">
-            Cómo funciona el Reactor de Materia Orgánica – RMO
-          </h3>
-          
-          <div className="space-y-12">
-            {stages.map((stage, stageIndex) => (
-              <div key={stageIndex} className="bg-white rounded-2xl shadow-lg p-8 border border-green-100">
-                <h4 className="text-2xl font-bold text-enerpy-primary mb-8 text-center">{stage.title}</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  {stage.steps.map((step, stepIndex) => (
-                    <div key={stepIndex} className="flex items-start space-x-4">
-                      <div className="bg-enerpy-primary text-white rounded-full w-12 h-12 flex items-center justify-center font-bold text-lg flex-shrink-0">
-                        {step.icon}
-                      </div>
-                      <div>
-                        <h5 className="text-xl font-bold text-enerpy-dark mb-3">{step.title}</h5>
-                        <p className="text-enerpy-gray leading-relaxed">{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Sostenibilidad económica */}
         <div className="bg-gradient-to-r from-enerpy-primary to-green-600 rounded-2xl p-8 text-white mb-16">
