@@ -39,15 +39,15 @@ export const StickyScroll = ({
   }, [content.length]);
 
   const backgroundColors = [
-    "rgb(15 23 42)", // slate-900
-    "rgb(0 0 0)", // black
-    "rgb(23 23 23)", // neutral-900
+    "rgb(34 197 94)", // green-500
+    "rgb(22 163 74)", // green-600
+    "rgb(21 128 61)", // green-700
   ];
 
   const linearGradients = [
-    "linear-gradient(to bottom right, rgb(6 182 212), rgb(16 185 129))", // cyan-500 to emerald-500
-    "linear-gradient(to bottom right, rgb(236 72 153), rgb(99 102 241))", // pink-500 to indigo-500
-    "linear-gradient(to bottom right, rgb(249 115 22), rgb(234 179 8))", // orange-500 to yellow-500
+    "linear-gradient(to bottom right, rgb(16 185 129), rgb(34 197 94))", // emerald-500 to green-500
+    "linear-gradient(to bottom right, rgb(34 197 94), rgb(22 163 74))", // green-500 to green-600
+    "linear-gradient(to bottom right, rgb(22 163 74), rgb(21 128 61))", // green-600 to green-700
   ];
 
   const currentBackground = backgroundColors[activeCard % backgroundColors.length];
