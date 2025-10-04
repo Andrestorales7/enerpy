@@ -1,4 +1,3 @@
-import TechnologySection from "@/components/TechnologySection";
 import TechnologyDetailedSection from "@/components/TechnologyDetailedSection";
 import ProcessStickyScrollDemo from "@/components/ProcessStickyScroll";
 import TechnologyHero from "@/components/TechnologyHero";
