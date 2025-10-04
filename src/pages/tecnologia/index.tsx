@@ -1,5 +1,6 @@
 import TechnologySection from "@/components/TechnologySection";
 import TechnologyDetailedSection from "@/components/TechnologyDetailedSection";
+import ProcessStickyScrollDemo from "@/components/ProcessStickyScroll";
 import TechnologyHero from "@/components/TechnologyHero";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -11,7 +12,7 @@ const Technology = () => {
       <Navbar />
       <TechnologyHero />
       <TechnologyDetailedSection />
-      <TechnologySection />
+      <ProcessStickyScrollDemo />
       <Footer />
       <ScrollToTop />
     </div>
