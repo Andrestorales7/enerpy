@@ -13,8 +13,8 @@ const content = [
         <div className="bg-white/20 rounded-full p-4 mb-4">
           <Recycle className="w-12 h-12" />
         </div>
-        <h3 className="text-xl font-bold mb-2">1. Alimentación</h3>
-        <p className="text-sm text-center opacity-90">
+        <h3 className="text-2xl font-bold mb-3 text-white">1. Alimentación</h3>
+        <p className="text-base text-center text-white opacity-95">
           Residuos introducidos en cartuchos herméticos para aislamiento total del ambiente
         </p>
       </div>
@@ -29,8 +29,8 @@ const content = [
         <div className="bg-white/20 rounded-full p-4 mb-4">
           <Zap className="w-12 h-12" />
         </div>
-        <h3 className="text-xl font-bold mb-2">1A. Proceso</h3>
-        <p className="text-sm text-center opacity-90">
+        <h3 className="text-2xl font-bold mb-3 text-white">1A. Proceso</h3>
+        <p className="text-base text-center text-white opacity-95">
           Aplicación de energía radiante para radiolisis fotónica y descomposición química
         </p>
       </div>
@@ -45,8 +45,8 @@ const content = [
         <div className="bg-white/20 rounded-full p-4 mb-4">
           <Droplets className="w-12 h-12" />
         </div>
-        <h3 className="text-xl font-bold mb-2">2. Precipitadores</h3>
-        <p className="text-sm text-center opacity-90">
+        <h3 className="text-2xl font-bold mb-3 text-white">2. Precipitadores</h3>
+        <p className="text-base text-center text-white opacity-95">
           Separación selectiva de aceites por densidad y gas combustible a presión normal
         </p>
       </div>
@@ -61,8 +61,8 @@ const content = [
         <div className="bg-white/20 rounded-full p-4 mb-4">
           <CheckCircle className="w-12 h-12" />
         </div>
-        <h3 className="text-xl font-bold mb-2">3. Colecta</h3>
-        <p className="text-sm text-center opacity-90">
+        <h3 className="text-2xl font-bold mb-3 text-white">3. Colecta</h3>
+        <p className="text-base text-center text-white opacity-95">
           Colecta completa de productos en tanques especiales sin emisiones al ambiente
         </p>
       </div>
@@ -85,7 +85,7 @@ const ProcessStickyScrollDemo = () => {
         </div>
         
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
-          <StickyScroll content={content} />
+          <StickyScroll content={content} contentClassName="h-80 w-96" />
         </div>
       </div>
     </div>
