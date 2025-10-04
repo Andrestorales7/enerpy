@@ -48,7 +48,7 @@ const ProductsSection = () => {
       {/* Soft mask for dots fade-in */}
       <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/60 to-transparent z-15" />
       
-      <div className="relative z-10 container mx-auto px-4">
+      <div className="relative z-30 container mx-auto px-4">
         <div className="text-center mb-16 animated-section">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Productos Obtenidos</h2>
           <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
