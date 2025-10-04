@@ -91,6 +91,15 @@ const ProductsSection = () => {
         </div>
       </div>
       
+      {/* Smooth transition gradient at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white via-green-50/90 to-green-50/30 z-20" />
+      
+      {/* Additional gradient overlay for smoother bottom transition */}
+      <div className="absolute bottom-0 left-0 right-0 h-56 bg-gradient-to-t from-white/80 via-green-50/50 to-transparent z-10" />
+      
+      {/* Soft mask for dots fade-out */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white via-white/60 to-transparent z-15" />
+      
       <style jsx>{`
         @keyframes gradientShift {
           0% {
