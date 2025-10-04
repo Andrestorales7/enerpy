@@ -31,6 +31,9 @@ const ProductsSection = () => {
 
   return (
     <section className="relative py-24 overflow-hidden">
+      {/* Smooth transition gradient from top */}
+      <div className="absolute top-0 left-0 right-0 h-40 bg-gradient-to-b from-white via-green-50/90 to-green-50/30 z-20" />
+      
       <GradientDots 
         duration={20} 
         backgroundColor="#f0fdf4" 
@@ -38,6 +41,13 @@ const ProductsSection = () => {
         spacing={8}
         colorCycleDuration={8}
       />
+      
+      {/* Additional gradient overlay for smoother transition */}
+      <div className="absolute top-0 left-0 right-0 h-56 bg-gradient-to-b from-white/80 via-green-50/50 to-transparent z-10" />
+      
+      {/* Soft mask for dots fade-in */}
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-white via-white/60 to-transparent z-15" />
+      
       <div className="relative z-10 container mx-auto px-4">
         <div className="text-center mb-16 animated-section">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Productos Obtenidos</h2>
