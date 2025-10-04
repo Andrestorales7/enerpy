@@ -45,7 +45,8 @@ export function GradientDots({
           radial-gradient(circle at 50% 50%, #10b981, transparent 60%),
           radial-gradient(circle at 50% 50%, #f59e0b, transparent 60%),
           radial-gradient(ellipse at 50% 50%, #8b5cf6, transparent 60%),
-          linear-gradient(to bottom, transparent 0%, ${backgroundColor} 20%, ${backgroundColor} 100%)
+          linear-gradient(to bottom, transparent 0%, ${backgroundColor} 20%, ${backgroundColor} 80%, transparent 100%),
+          linear-gradient(to top, transparent 0%, ${backgroundColor} 20%, ${backgroundColor} 80%, transparent 100%)
         `,
 				backgroundSize: `
           ${spacing}px ${hexSpacing}px,
@@ -54,6 +55,7 @@ export function GradientDots({
           200% 200%,
           200% 200%,
           200% ${hexSpacing}px,
+          100% 100%,
           100% 100%
         `,
 				backgroundPosition: `
@@ -62,7 +64,8 @@ export function GradientDots({
           ${(animationKey * 1.8) % 400}% ${(animationKey * 2.2) % 300}%,
           ${(animationKey * 1.2) % 400}% ${(animationKey * 1.8) % 300}%,
           ${(animationKey * 2.5) % 400}% ${(animationKey * 1.3) % 300}%,
-          0% 0%
+          0% 0%,
+          0% 100%
         `,
 				animation: `gradientShift ${duration}s linear infinite, colorCycle ${colorCycleDuration}s linear infinite`,
 			}}
