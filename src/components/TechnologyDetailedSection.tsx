@@ -37,7 +37,7 @@ const TechnologyDetailedSection = () => {
           <div className="text-xl text-enerpy-gray leading-relaxed">
             <TextGenerateEffect 
               words="Enerpy S.A.C.I. ha desarrollado y patentado la tecnología RMO® denominada PROCESO DE RADIÓLISIS FOTÓNICA FOCALIZADA DE MATERIALES DE DESECHO, que permite la realización del más avanzado método de tratamiento térmico para gestión final de residuos por vía de la valorización, por medio de la recuperación de las sustancias básicas de las que están constituidas. La tecnología ha pasado por prototipos laboratoriales y plantas piloto, en experiencias que han permitido sustentar sus patentes y licencias ambientales en América, Europa y Asia, y numerosas evaluaciones técnicas entre las cuales merecen especial destaque la realizada en Paraguay por la empresa certificadora TÜV Rheinland de Alemania, bajo la supervisión del Prof. Hermann J. Thomann y la realizada en el año 2020 por el TNO de Los Países Bajos, Bajo la Supervisión del Msc Prof. Paul de Wild, en la Planta Ubicada en Groningen Seaports, Parque Químico Industrial en el norte de Los Países Bajos. Dichas pruebas han demostrado la viabilidad técnica y ambiental para producir sustancias utilizables a partir de los residuos orgánicos, así como el cumplimiento de las normas europeas."
-              duration={0.5}
+              duration={0.1}
               filter={true}
               className="text-enerpy-gray"
             />
