@@ -202,10 +202,10 @@ const MainHero = () => {
           <TextType
             text="BIENVENIDO A ENERPY"
             as="h1"
-            typingSpeed={150}
-            initialDelay={500}
-            pauseDuration={3000}
-            deletingSpeed={50}
+            typingSpeed={50}
+            initialDelay={200}
+            pauseDuration={2000}
+            deletingSpeed={30}
             loop={true}
             showCursor={false}
             cursorCharacter="|"
@@ -218,10 +218,10 @@ const MainHero = () => {
             <TextType
               text="Descubre cómo estamos transformando el futuro de la energía sostenible"
               as="p"
-              typingSpeed={80}
-              initialDelay={2000}
-              pauseDuration={4000}
-              deletingSpeed={30}
+              typingSpeed={30}
+              initialDelay={1000}
+              pauseDuration={2000}
+              deletingSpeed={20}
               loop={true}
               showCursor={false}
               cursorCharacter="_"
