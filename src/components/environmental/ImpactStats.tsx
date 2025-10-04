@@ -21,7 +21,7 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
     tonsRecycled: 1000,
     co2Reduced: 2640,
     treesPlanted: 337,
-    projectsImplemented: 17
+    projectsImplemented: 0
   };
 
   const startCounting = useCallback(() => {
@@ -91,7 +91,7 @@ const ImpactStats = ({ onStartCounting }: ImpactStatsProps) => {
           <StatCard icon={Recycle} value={`+${counts.tonsRecycled}`} label="Toneladas de residuos transformados en materias primas por año" />
           <StatCard icon={Leaf} value={`+${counts.co2Reduced}`} label="Ton. CO2 capturado por año" />
           <StatCard icon={TreeDeciduous} value={`+${counts.treesPlanted}`} label="Procesos" />
-          <StatCard icon={Globe} value={counts.projectsImplemented} label="Alineado con los Objetivos de Desarrollo Sostenible" />
+          <StatCard icon={Globe} value="ODS" label="Alineado con los Objetivos de Desarrollo Sostenible" />
         </div>
       </div>
     </div>
