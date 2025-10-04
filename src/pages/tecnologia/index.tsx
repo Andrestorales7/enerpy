@@ -1,4 +1,5 @@
 import TechnologySection from "@/components/TechnologySection";
+import TechnologyDetailedSection from "@/components/TechnologyDetailedSection";
 import TechnologyHero from "@/components/TechnologyHero";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -9,6 +10,7 @@ const Technology = () => {
     <div className="min-h-screen">
       <Navbar />
       <TechnologyHero />
+      <TechnologyDetailedSection />
       <TechnologySection />
       <Footer />
       <ScrollToTop />
