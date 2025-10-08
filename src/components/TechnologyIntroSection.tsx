@@ -31,3 +31,4 @@ const TechnologyIntroSection = () => {
 };
 
 export default TechnologyIntroSection;
+
