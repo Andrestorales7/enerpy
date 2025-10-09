@@ -31,7 +31,7 @@ const EnvironmentalImpactSection = () => {
   return (
     <section id="impacto" className="py-0 bg-gradient-to-b from-white to-green-50 w-full">
       {/* Encabezado de la sección */}
-      <div className="w-full text-center pt-24 pb-10 animated-section">
+      <div className="w-full text-center pt-12 pb-8 animated-section">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Impacto Ambiental</h2>
         <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
         <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
