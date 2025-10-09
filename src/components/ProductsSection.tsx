@@ -69,7 +69,7 @@ const ProductsSection = () => {
       
       <div className="relative z-30 container mx-auto px-4">
         <div className="text-center mb-16 animated-section">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gradient">Productos Obtenidos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white drop-shadow-lg">Productos Obtenidos</h2>
           <div className="w-24 h-1 bg-enerpy-primary mx-auto mb-8"></div>
           <p className="text-lg md:text-xl text-enerpy-gray max-w-3xl mx-auto">
             Transformamos residuos en productos de alto valor energético y ambiental
