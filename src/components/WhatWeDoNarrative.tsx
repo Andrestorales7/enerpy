@@ -4,10 +4,37 @@ import { Leaf, Recycle, Flame, Zap, Droplets, ArrowRight, Factory, ShieldCheck }
 const WhatWeDoNarrative = () => {
   return (
     <section className="relative w-full overflow-hidden">
-      {/* Top background visual */}
+      {/* Background visual: soft green smoke layers */}
       <div className="absolute inset-0 pointer-events-none">
+        {/* Existing soft blobs */}
         <div className="absolute -top-20 -right-32 w-[520px] h-[520px] rounded-full bg-emerald-300/10 blur-3xl" />
         <div className="absolute top-40 -left-32 w-[420px] h-[420px] rounded-full bg-green-400/10 blur-3xl" />
+
+        {/* Green smoke wisps */}
+        <div
+          className="smoke absolute -top-10 left-10 w-[320px] h-[320px] opacity-35"
+          style={{
+            background:
+              'radial-gradient(40% 60% at 50% 50%, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0.12) 45%, rgba(16,185,129,0.0) 70%)',
+            filter: 'blur(24px)'
+          }}
+        />
+        <div
+          className="smoke absolute top-24 right-24 w-[420px] h-[420px] opacity-30"
+          style={{
+            background:
+              'radial-gradient(45% 65% at 50% 50%, rgba(5,150,105,0.22) 0%, rgba(5,150,105,0.10) 48%, rgba(5,150,105,0.0) 72%)',
+            filter: 'blur(28px)'
+          }}
+        />
+        <div
+          className="smoke slow absolute bottom-[-60px] left-1/3 w-[500px] h-[500px] opacity-25"
+          style={{
+            background:
+              'radial-gradient(50% 70% at 50% 50%, rgba(22,163,74,0.20) 0%, rgba(22,163,74,0.10) 46%, rgba(22,163,74,0.0) 75%)',
+            filter: 'blur(30px)'
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 py-20 space-y-20 relative">
@@ -159,6 +186,24 @@ const WhatWeDoNarrative = () => {
           </div>
         </div>
       </div>
+
+      {/* Local animations for smoke wisps */}
+      <style>{`
+        .smoke { 
+          animation: floatSlow 18s ease-in-out infinite;
+        }
+        .smoke.slow {
+          animation-duration: 26s;
+          animation-delay: 2s;
+        }
+        @keyframes floatSlow {
+          0% { transform: translate3d(0, 0, 0) scale(1); }
+          25% { transform: translate3d(12px, -10px, 0) scale(1.03); }
+          50% { transform: translate3d(-8px, 6px, 0) scale(0.98); }
+          75% { transform: translate3d(10px, 12px, 0) scale(1.02); }
+          100% { transform: translate3d(0, 0, 0) scale(1); }
+        }
+      `}</style>
     </section>
   );
 };
