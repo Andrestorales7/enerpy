@@ -100,7 +100,7 @@ const ColorFeatureSection = ({ icon: Icon, title, description, index }: ColorFea
 const WhatWeDoSection = () => {
   return (
     <section id="que-hacemos" className="bg-gradient-to-br from-green-50 via-white to-emerald-50">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => (
           <ColorFeatureSection
             key={index}
@@ -112,8 +112,8 @@ const WhatWeDoSection = () => {
         ))}
       </div>
 
-      <div className="w-full px-6 py-20">
-        <section className="w-full flex flex-col lg:flex-row items-stretch mb-20 min-h-[420px] lg:min-h-[480px]">
+      <div className="w-full px-6 py-12">
+        <section className="w-full flex flex-col lg:flex-row items-stretch mb-8 min-h-[360px] lg:min-h-[420px]">
           <div className="flex-1 flex items-center justify-center bg-green-800/90 p-10 lg:p-16 rounded-t-3xl lg:rounded-l-3xl lg:rounded-tr-none">
             <div className="max-w-xl">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">HUELLA ECOLÓGICA</h2>
