@@ -1,4 +1,5 @@
 import { Flame, Droplets, Zap, Wind } from 'lucide-react';
+import { useState, useCallback } from 'react';
 import { GradientDots } from '@/components/ui/gradient-dots';
 
 const ProductsSection = () => {
@@ -28,6 +29,24 @@ const ProductsSection = () => {
       color: "from-gray-500 to-gray-400"
     }
   ];
+
+  // gallery images for right-side media
+  const galleryImages = [
+    '/images/carbon2.jpg',
+    '/images/produccion.jpg',
+    '/images/water-treatment.jpg',
+    '/images/separacion-purificacion.jpg'
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  const goNext = useCallback(() => {
+    setCurrentImage((prev) => (prev + 1) % galleryImages.length);
+  }, [galleryImages.length]);
+
+  const goPrev = useCallback(() => {
+    setCurrentImage((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  }, [galleryImages.length]);
 
   return (
     <section className="relative py-24 overflow-hidden">
@@ -84,11 +103,41 @@ const ProductsSection = () => {
 
           <div className="relative rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-300">
             <img 
-              src="/images/carbon2.jpg" 
+              src={galleryImages[currentImage]} 
               alt="Productos Energéticos" 
               className="w-full h-[600px] object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
+
+            {/* Controls */}
+            <button
+              aria-label="Anterior"
+              onClick={goPrev}
+              className="absolute left-3 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm transition"
+            >
+              ‹
+            </button>
+            <button
+              aria-label="Siguiente"
+              onClick={goNext}
+              className="absolute right-3 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white border border-white/30 rounded-full w-10 h-10 flex items-center justify-center backdrop-blur-sm transition"
+            >
+              ›
+            </button>
+
+            {/* Dots */}
+            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-2 z-10">
+              {galleryImages.map((_, idx) => (
+                <button
+                  key={idx}
+                  aria-label={`Ir a imagen ${idx + 1}`}
+                  onClick={() => setCurrentImage(idx)}
+                  className={`w-2.5 h-2.5 rounded-full transition border border-white/40 ${
+                    currentImage === idx ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
