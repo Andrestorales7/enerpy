@@ -8,10 +8,11 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="mb-4">
-              <span className="text-3xl font-montserrat font-bold">
-                <span className="text-white">ENER</span>
-                <span className="text-enerpy-light">Py</span>
-              </span>
+              <img 
+                src="/enerpy-logo.png" 
+                alt="Enerpy Logo" 
+                className="h-12 w-auto"
+              />
             </div>
             <p className="mb-6 text-white/80">
               Transformando residuos en energía sostenible para un futuro más limpio y próspero.
