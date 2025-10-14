@@ -31,14 +31,11 @@ const Navbar = () => {
     )}>
       <div className="container mx-auto px-4 flex justify-between items-center">
         <Link to="/" className="flex items-center">
-          <span className="text-2xl lg:text-3xl font-montserrat font-bold">
-            <span className={cn(
-              isScrolled ? 'text-enerpy-dark' : 'text-white'
-            )}>ENER</span>
-            <span className={cn(
-              isScrolled ? 'text-enerpy-primary' : 'text-enerpy-light'
-            )}>Py</span>
-          </span>
+          <img 
+            src="/enerpy-logo.png" 
+            alt="Enerpy Logo" 
+            className="h-10 w-auto"
+          />
         </Link>
 
         {/* Desktop Navigation */}
