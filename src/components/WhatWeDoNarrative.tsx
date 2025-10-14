@@ -105,58 +105,7 @@ const WhatWeDoNarrative = () => {
           </div>
         </div>
 
-        {/* 4. How it works - IN → RMO → OUT */}
-        <div className="bg-white rounded-3xl border border-green-100 shadow-lg p-6 md:p-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-            {/* IN */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">IN</div>
-              <h4 className="text-xl font-bold text-enerpy-dark">Residuos</h4>
-              <p className="text-enerpy-gray">RSU, Biomasa, Plásticos, RAEE, Pallets, etc. se introducen dentro del reactor.</p>
-              <div className="flex flex-wrap gap-2">
-                <span className="px-3 py-1 text-sm rounded-full bg-emerald-100 text-emerald-900">RSU</span>
-                <span className="px-3 py-1 text-sm rounded-full bg-emerald-100 text-emerald-900">Biomasa</span>
-                <span className="px-3 py-1 text-sm rounded-full bg-emerald-100 text-emerald-900">Plásticos</span>
-                <span className="px-3 py-1 text-sm rounded-full bg-emerald-100 text-emerald-900">RAEE</span>
-                <span className="px-3 py-1 text-sm rounded-full bg-emerald-100 text-emerald-900">Pallets</span>
-              </div>
-            </div>
-
-            {/* Arrow / Core */}
-            <div className="flex flex-col items-center text-center">
-              <ArrowRight className="w-7 h-7 text-emerald-600 mb-3" />
-              <div className="rounded-2xl bg-gradient-to-br from-emerald-500 to-green-700 text-white px-6 py-6 shadow-lg w-full">
-                <div className="flex items-center justify-center gap-2 mb-1">
-                  <Factory className="w-5 h-5" /> <span className="font-bold">RMO</span>
-                </div>
-                <p className="text-sm text-emerald-50">Descompone moléculas sin oxígeno, sin humo, sin contaminación.</p>
-              </div>
-              <ArrowRight className="w-7 h-7 text-emerald-600 mt-3" />
-            </div>
-
-            {/* OUT */}
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">OUT</div>
-              <h4 className="text-xl font-bold text-enerpy-dark">Resultados</h4>
-              <p className="text-enerpy-gray">Nuevos productos y materia prima que vuelven a la economía.</p>
-              <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-xl border border-green-100 p-4 text-center">
-                  <Droplets className="w-6 h-6 mx-auto text-emerald-600" />
-                  <div className="text-sm font-semibold mt-2">Petróleo Sintético</div>
-                </div>
-                <div className="rounded-xl border border-green-100 p-4 text-center">
-                  <Zap className="w-6 h-6 mx-auto text-emerald-600" />
-                  <div className="text-sm font-semibold mt-2">Gas Ecológico</div>
-                </div>
-                <div className="rounded-xl border border-green-100 p-4 text-center">
-                  <Flame className="w-6 h-6 mx-auto text-emerald-600" />
-                  <div className="text-sm font-semibold mt-2">Carbón</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
         {/* 5. Visual cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20">
