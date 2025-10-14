@@ -1,5 +1,6 @@
 import WhatWeDoHero from "@/components/WhatWeDoHero";
 import WhatWeDoNarrative from "@/components/WhatWeDoNarrative";
+import ProcessDemo from "@/components/ProcessDemo";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import Navbar from "@/components/Navbar";
@@ -10,6 +11,7 @@ const WhatWeDo = () => {
       <Navbar />
       <WhatWeDoHero />
       <WhatWeDoNarrative />
+      <ProcessDemo />
       <Footer />
       <ScrollToTop />
     </div>
