@@ -1,4 +1,4 @@
-import { Leaf, Recycle, Flame, Zap, Droplets, ArrowRight, Factory, ShieldCheck } from 'lucide-react';
+import { Leaf, Recycle, Factory, ShieldCheck } from 'lucide-react';
 
 const WhatWeDoNarrative = () => {
   return (
