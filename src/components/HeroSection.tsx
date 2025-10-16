@@ -1,4 +1,4 @@
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useEffect, useState, useCallback } from 'react';
 
 const HeroSection = () => {
@@ -7,25 +7,23 @@ const HeroSection = () => {
 
   const slogans = [
     {
+      text: "Acelerando lo que la naturaleza tarda",
+      highlight: "siglos en lograr",
+      backgroundImage: "/images/zero-emission.jpg"
+    },
+    {
       text: "Transformamos residuos en",
-      highlight: "recursos"
+      highlight: "recursos",
+      backgroundImage: "/images/separacion-purificacion.jpg"
     },
     {
       text: "Una tecnología única que convierte la basura en",
-      highlight: "materia prima y energía"
+      highlight: "materia prima y energía",
+      backgroundImage: "/images/reactor2.jpg"
     },
-    {
-      text: "Acelerando lo que la naturaleza tarda",
-      highlight: "siglos en lograr"
-    }
+    
   ];
 
-  const handleScroll = () => {
-    const nextSection = document.getElementById('que-hacemos');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   const changeSlogan = useCallback((newIndex: number) => {
     if (newIndex !== currentSlogan && !isTransitioning) {
@@ -47,24 +45,29 @@ const HeroSection = () => {
 
   return (
     <section className="relative min-h-screen flex items-end justify-end overflow-hidden">
-      {/* Background Image */}
+      {/* Background Image with transition */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-all duration-1000 ease-in-out"
         style={{
-          backgroundImage: `url('/images/co2hero.jpg')`,
-          filter: 'brightness(1.0) contrast(0.95)',
+          backgroundImage: `url('${slogans[currentSlogan].backgroundImage}')`,
+          filter: 'brightness(0.8) contrast(1.1)',
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-l from-black/40 via-transparent to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-l from-black/50 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
       </div>
 
       <div className="relative z-10 w-full flex flex-col items-end pr-4 md:pr-24 pb-2 md:pb-28">
-        <div className="max-w-2xl text-right">
+        <div className="max-w-5xl text-right">
           <h1
-            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 leading-tight transition-all duration-500 ease-in-out whitespace-normal break-words ${
+            className={`text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-white mb-6 transition-all duration-500 ease-in-out ${
               isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
             }`}
+            style={{
+              lineHeight: '1.3',
+              maxHeight: '2.6em',
+              overflow: 'visible'
+            }}
           >
             <span className="mr-3 text-white/95">
               {slogans[currentSlogan].text}
