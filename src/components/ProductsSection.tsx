@@ -32,9 +32,9 @@ const ProductsSection = () => {
 
   // gallery images for right-side media
   const galleryImages = [
-    '/images/carbon2.jpg',
-    '/images/produccion.jpg',
-    '/images/water-treatment.jpg',
+    '/images/productos/carbon2.jpg',
+    '/images/productos/aceites.jpg',
+    '/images/productos/gas.jpg',
     '/images/separacion-purificacion.jpg'
   ];
 
