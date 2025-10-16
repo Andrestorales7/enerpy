@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, CheckCircle, Leaf, Factory, Zap, Recycle, Award, Globe } from 'lucide-react';
-import { TextGenerateEffect } from '@/components/ui/text-generate-effect';
+import { useState } from 'react';
+import { CheckCircle, Leaf, Factory, Zap, Recycle, Award, Globe } from 'lucide-react';
 
 const TechnologyDetailedSection = () => {
   const [activeProcess, setActiveProcess] = useState(0);

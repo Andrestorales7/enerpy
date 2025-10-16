@@ -1,7 +1,6 @@
 "use client";
-import React from "react";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
-import { Factory, Recycle, Droplets, Zap, ArrowRight, CheckCircle } from "lucide-react";
+import { Recycle, Droplets, Zap, CheckCircle } from "lucide-react";
 
 const content = [
   {
