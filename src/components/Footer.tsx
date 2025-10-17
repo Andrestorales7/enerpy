@@ -1,17 +1,17 @@
 
-import { Mail, Phone, MapPin, Linkedin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-enerpy-dark text-white">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           <div>
             <div className="mb-4">
               <img 
                 src="/enerpy-logo.png" 
                 alt="Enerpy Logo" 
-                className="h-12 w-auto"
+                className="h-20 w-auto"
               />
             </div>
             <p className="mb-6 text-white/80">
@@ -19,8 +19,6 @@ const Footer = () => {
             </p>
             <div className="flex space-x-4">
               <SocialIcon Icon={Facebook} href="#" />
-              <SocialIcon Icon={Twitter} href="#" />
-              <SocialIcon Icon={Linkedin} href="#" />
               <SocialIcon Icon={Instagram} href="#" />
             </div>
           </div>
@@ -53,24 +51,6 @@ const Footer = () => {
                 <span className="text-white/80">contacto@enerpy.com</span>
               </li>
             </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-bold mb-4">Suscríbete</h3>
-            <p className="mb-4 text-white/80">Recibe nuestras últimas novedades y actualizaciones</p>
-            <form className="flex flex-col space-y-3">
-              <input 
-                type="email" 
-                placeholder="Tu correo electrónico" 
-                className="px-4 py-2 bg-white/10 border border-white/20 rounded-md focus:outline-none focus:border-enerpy-light"
-              />
-              <button 
-                type="submit" 
-                className="px-4 py-2 bg-enerpy-primary hover:bg-enerpy-light transition-colors duration-300 rounded-md"
-              >
-                Suscribirse
-              </button>
-            </form>
           </div>
         </div>
         
