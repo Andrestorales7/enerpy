@@ -2,134 +2,249 @@ import { Leaf, Recycle, Factory, ShieldCheck } from 'lucide-react';
 
 const WhatWeDoNarrative = () => {
   return (
-    <section className="relative w-full overflow-hidden">
+    <section className="relative w-full overflow-hidden bg-gray-50/30">
       {/* Background visual: soft green smoke layers */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Existing soft blobs */}
-        <div className="absolute -top-20 -right-32 w-[520px] h-[520px] rounded-full bg-emerald-300/10 blur-3xl" />
-        <div className="absolute top-40 -left-32 w-[420px] h-[420px] rounded-full bg-green-400/10 blur-3xl" />
+        <div className="absolute -top-20 -right-32 w-[520px] h-[520px] rounded-full bg-emerald-300/8 blur-3xl" />
+        <div className="absolute top-40 -left-32 w-[420px] h-[420px] rounded-full bg-green-400/8 blur-3xl" />
 
         {/* Green smoke wisps */}
         <div
-          className="smoke absolute -top-10 left-10 w-[320px] h-[320px] opacity-35"
+          className="smoke absolute -top-10 left-10 w-[320px] h-[320px] opacity-20"
           style={{
             background:
-              'radial-gradient(40% 60% at 50% 50%, rgba(16,185,129,0.25) 0%, rgba(16,185,129,0.12) 45%, rgba(16,185,129,0.0) 70%)',
+              'radial-gradient(40% 60% at 50% 50%, rgba(16,185,129,0.15) 0%, rgba(16,185,129,0.08) 45%, rgba(16,185,129,0.0) 70%)',
             filter: 'blur(24px)'
           }}
         />
         <div
-          className="smoke absolute top-24 right-24 w-[420px] h-[420px] opacity-30"
+          className="smoke absolute top-24 right-24 w-[420px] h-[420px] opacity-18"
           style={{
             background:
-              'radial-gradient(45% 65% at 50% 50%, rgba(5,150,105,0.22) 0%, rgba(5,150,105,0.10) 48%, rgba(5,150,105,0.0) 72%)',
+              'radial-gradient(45% 65% at 50% 50%, rgba(5,150,105,0.12) 0%, rgba(5,150,105,0.06) 48%, rgba(5,150,105,0.0) 72%)',
             filter: 'blur(28px)'
           }}
         />
         <div
-          className="smoke slow absolute bottom-[-60px] left-1/3 w-[500px] h-[500px] opacity-25"
+          className="smoke slow absolute bottom-[-60px] left-1/3 w-[500px] h-[500px] opacity-15"
           style={{
             background:
-              'radial-gradient(50% 70% at 50% 50%, rgba(22,163,74,0.20) 0%, rgba(22,163,74,0.10) 46%, rgba(22,163,74,0.0) 75%)',
+              'radial-gradient(50% 70% at 50% 50%, rgba(22,163,74,0.10) 0%, rgba(22,163,74,0.05) 46%, rgba(22,163,74,0.0) 75%)',
             filter: 'blur(30px)'
           }}
         />
       </div>
 
-      <div className="container mx-auto px-4 py-20 space-y-20 relative">
-        {/* 1. Quote / Premise */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="space-y-6">
-            <h2 className="text-3xl md:text-4xl font-extrabold text-enerpy-dark leading-tight">
-              La naturaleza no conoce la basura. Nosotros la inventamos.
-            </h2>
-            <p className="text-lg md:text-xl text-enerpy-gray leading-relaxed">
-              La naturaleza siempre funcionó en círculos: ciclos de la biodegradación, la meteorización y el ciclo de las estaciones. 
-              Nada se pierde: todo se degrada y regenera en nuevos vegetales y animales o se fosiliza y, con el tiempo, se convierte en petróleo, carbón y gas. 
-              Así, la naturaleza recicla todo de manera infinita.
-            </p>
-          </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20">
-            <img 
-              src="/images/view-green-forest-trees-with-co2.jpg" 
-              alt="Ciclos naturales" 
-              className="w-full h-[320px] object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          </div>
+      {/* Header hero con imagen de fondo que cubre toda la pantalla */}
+      <div className="relative min-h-[70vh] flex items-center justify-center">
+        {/* Imagen de fondo que cubre toda la pantalla */}
+        <div className="absolute inset-0">
+          <img 
+            src="/images/31051.jpg" 
+            alt="Fondo tecnología limpia" 
+            className="w-full h-full object-cover"
+          />
+          {/* Overlay para mejorar legibilidad */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-black/40 to-black/50" />
+          <div className="absolute inset-0 bg-enerpy-primary/20" />
         </div>
-
-        {/* 2. Problem */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-          <div className="lg:col-span-1 bg-white rounded-2xl shadow-lg p-8 border border-green-100">
-            <h3 className="text-2xl font-bold text-enerpy-dark mb-4">El desequilibrio humano</h3>
-            <p className="text-enerpy-gray leading-relaxed">
-              La humanidad rompió ese equilibrio: creamos plásticos que tardan siglos en degradarse, 
-              acumulamos montañas de desechos y contaminamos la tierra, el aire y el agua.
-            </p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-green-100">
-            <h4 className="text-xl font-bold text-enerpy-dark mb-3 flex items-center gap-2">
-              <Leaf className="w-5 h-5 text-enerpy-primary" /> Desafío 1
-            </h4>
-            <p className="text-enerpy-gray">Cómo eliminar los residuos sin contaminar más.</p>
-          </div>
-          <div className="bg-white rounded-2xl shadow-lg p-8 border border-green-100">
-            <h4 className="text-xl font-bold text-enerpy-dark mb-3 flex items-center gap-2">
-              <ShieldCheck className="w-5 h-5 text-enerpy-primary" /> Desafío 2
-            </h4>
-            <p className="text-enerpy-gray">Cómo obtener materias primas sin seguir destruyendo la naturaleza (calentamiento global, deforestación, contaminación).</p>
-          </div>
-        </div>
-
-        {/* 3. Solution Intro */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-          <div className="space-y-5">
-            <h3 className="text-3xl md:text-4xl font-extrabold text-enerpy-dark">La solución: El RMO</h3>
-            <p className="text-lg text-enerpy-gray leading-relaxed">
-              Un invento y desarrollo tecnológico disruptivo que <span className="font-semibold">colabora con la naturaleza</span> 
-              acelerando el proceso de degradación natural, pero <span className="font-semibold">millones de veces más rápido</span>.
-            </p>
-            <div className="flex items-center gap-3 text-enerpy-dark/80">
-              <Factory className="w-6 h-6 text-enerpy-primary" />
-              <span className="font-semibold">Reactor de Materia Orgánica (RMO)</span>
-            </div>
-            <p className="text-enerpy-gray">
-              Tecnología patentada que transforma todo tipo de desechos (excepto radioactivos y explosivos) en recursos valiosos 
-              mediante un proceso único: <span className="font-semibold">radiólisis fotónica focalizada</span>.
-            </p>
-          </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl">
-            <img src="/images/reactor2.jpg" alt="Reactor RMO" className="w-full h-[360px] object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          </div>
-        </div>
-
         
-        {/* 5. Visual cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20">
-            <img src="/images/recycle.jpg" alt="Reciclaje avanzado" className="w-full h-[260px] object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm mb-2"><Recycle className="w-4 h-4" /> Economía Circular</div>
-              <h5 className="text-lg font-semibold">Valorización de residuos</h5>
+        {/* Contenido del header */}
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center space-y-6 max-w-4xl mx-auto px-6">
+            
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight drop-shadow-lg">
+              Transformamos residuos en{' '}
+              <span className="text-enerpy-primary bg-white/10 px-2 py-1 rounded-lg backdrop-blur-sm">recursos valiosos</span>
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 leading-relaxed max-w-3xl mx-auto drop-shadow-md">
+              Devolvemos el equilibrio natural mediante tecnología disruptiva que acelera los procesos de degradación de la naturaleza
+            </p>
+            
+            {/* Indicador de scroll */}
+            <div className="pt-8">
+              <div className="w-6 h-10 border-2 border-white/40 rounded-full flex justify-center mx-auto">
+                <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-bounce"></div>
+              </div>
             </div>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20">
-            <img src="/images/produccion.jpg" alt="Producción limpia" className="w-full h-[260px] object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm mb-2"><Factory className="w-4 h-4" /> Cero Emisiones</div>
-              <h5 className="text-lg font-semibold">Proceso sin humo ni oxígeno</h5>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 pb-20 space-y-16 relative -mt-32 z-10">
+
+        {/* 1. Quote / Premise - rediseñado con superposición */}
+        <div className="bg-white rounded-3xl shadow-2xl border border-green-100 overflow-hidden relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-8 md:p-12 space-y-6 flex flex-col justify-center">
+              <div className="w-16 h-1 bg-enerpy-primary rounded-full"></div>
+              <h2 className="text-2xl md:text-3xl font-bold text-enerpy-dark leading-tight">
+                "La naturaleza no conoce la basura. Nosotros la inventamos."
+              </h2>
+              <p className="text-lg text-enerpy-gray leading-relaxed">
+                La naturaleza siempre funcionó en círculos: ciclos de la biodegradación, la meteorización y el ciclo de las estaciones. 
+                Nada se pierde: todo se degrada y regenera en nuevos vegetales y animales o se fosiliza y, con el tiempo, se convierte en petróleo, carbón y gas. 
+                <span className="font-semibold text-enerpy-dark"> Así, la naturaleza recicla todo de manera infinita.</span>
+              </p>
+            </div>
+            <div className="relative h-[400px] lg:h-auto">
+              <img 
+                src="/images/view-green-forest-trees-with-co2.jpg" 
+                alt="Ciclos naturales" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-enerpy-primary/20 to-transparent" />
             </div>
           </div>
-          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/20">
-            <img src="/images/mountains.jpg" alt="Impacto positivo" className="w-full h-[260px] object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-4 left-4 right-4 text-white">
-              <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full text-sm mb-2"><Leaf className="w-4 h-4" /> Sostenibilidad</div>
-              <h5 className="text-lg font-semibold">Materias primas para una nueva economía</h5>
+        </div>
+
+        {/* 2. Problem - rediseñado con mejor jerarquía visual */}
+        <div className="space-y-6">
+          <div className="text-center space-y-3">
+            <h3 className="text-2xl md:text-3xl font-bold text-enerpy-dark">El desequilibrio que creamos</h3>
+            <p className="text-base text-enerpy-gray max-w-2xl mx-auto">
+              La humanidad rompió ese equilibrio natural creando desafíos que requieren soluciones innovadoras
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="bg-gradient-to-br from-red-50 to-orange-50 rounded-2xl shadow-lg p-8 border border-red-100">
+              <div className="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center mb-6">
+                <Factory className="w-6 h-6 text-red-600" />
+              </div>
+              <h4 className="text-xl font-bold text-red-800 mb-4">El problema</h4>
+              <p className="text-red-700 leading-relaxed">
+                Creamos plásticos que tardan siglos en degradarse, acumulamos montañas de desechos y contaminamos la tierra, el aire y el agua.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-amber-50 to-yellow-50 rounded-2xl shadow-lg p-8 border border-amber-100">
+              <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center mb-6">
+                <Leaf className="w-6 h-6 text-amber-600" />
+              </div>
+              <h4 className="text-xl font-bold text-amber-800 mb-4">Desafío 1</h4>
+              <p className="text-amber-700 leading-relaxed">
+                Cómo eliminar los residuos sin contaminar más el medio ambiente.
+              </p>
+            </div>
+            
+            <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl shadow-lg p-8 border border-blue-100">
+              <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-6">
+                <ShieldCheck className="w-6 h-6 text-blue-600" />
+              </div>
+              <h4 className="text-xl font-bold text-blue-800 mb-4">Desafío 2</h4>
+              <p className="text-blue-700 leading-relaxed">
+                Cómo obtener materias primas sin seguir destruyendo la naturaleza (calentamiento global, deforestación, contaminación).
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Solution Intro - rediseñado con mejor impacto visual */}
+        <div className="bg-gradient-to-br from-enerpy-primary/5 via-emerald-50 to-green-50 rounded-3xl shadow-xl border border-enerpy-primary/20 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="p-8 md:p-12 space-y-6 flex flex-col justify-center">
+              <div className="inline-flex items-center gap-2 bg-enerpy-primary/10 text-enerpy-primary px-4 py-2 rounded-full text-sm font-medium w-fit">
+                <Factory className="w-4 h-4" />
+                Nuestra Solución
+              </div>
+              <h3 className="text-2xl md:text-3xl font-bold text-enerpy-dark">
+                El RMO: Tecnología Disruptiva
+              </h3>
+              <p className="text-lg text-enerpy-gray leading-relaxed">
+                Un invento y desarrollo tecnológico disruptivo que <span className="font-semibold text-enerpy-primary">colabora con la naturaleza</span> 
+                acelerando el proceso de degradación natural, pero <span className="font-semibold text-enerpy-primary">millones de veces más rápido</span>.
+              </p>
+              
+              <div className="space-y-4">
+                <div className="flex items-start gap-4 p-4 bg-white/60 rounded-xl">
+                  <div className="w-10 h-10 bg-enerpy-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Factory className="w-5 h-5 text-enerpy-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-enerpy-dark mb-1">Reactor de Materia Orgánica (RMO)</h4>
+                    <p className="text-sm text-enerpy-gray">Tecnología patentada con proceso único de radiólisis fotónica focalizada</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start gap-4 p-4 bg-white/60 rounded-xl">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <Recycle className="w-5 h-5 text-green-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-enerpy-dark mb-1">Transforma todo tipo de desechos</h4>
+                    <p className="text-sm text-enerpy-gray">Excepto radioactivos y explosivos, en recursos valiosos</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative h-[400px] lg:h-auto">
+              <img src="/images/reactor2.jpg" alt="Reactor RMO" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-br from-enerpy-primary/30 to-transparent" />
+              <div className="absolute bottom-6 left-6 right-6">
+                <div className="bg-white/90 backdrop-blur-sm rounded-xl p-4">
+                  <p className="text-sm font-medium text-enerpy-dark">Reactor RMO en operación</p>
+                  <p className="text-xs text-enerpy-gray">Proceso sin humo ni emisiones tóxicas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. Visual cards - rediseñado con mejor presentación */}
+        <div className="space-y-6">
+          <div className="text-center space-y-3">
+            <h3 className="text-2xl md:text-3xl font-bold text-enerpy-dark">Impacto transformador</h3>
+            <p className="text-base text-enerpy-gray max-w-2xl mx-auto">
+              Nuestra tecnología genera múltiples beneficios para el medio ambiente y la economía
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative h-[280px] overflow-hidden">
+                <img src="/images/recycle.jpg" alt="Reciclaje avanzado" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="inline-flex items-center gap-2 bg-enerpy-primary/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
+                  <Recycle className="w-4 h-4" /> 
+                  Economía Circular
+                </div>
+                <h5 className="text-xl font-bold mb-2">Valorización de residuos</h5>
+                <p className="text-sm text-white/90">Convertimos desechos en materias primas valiosas</p>
+              </div>
+            </div>
+            
+            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative h-[280px] overflow-hidden">
+                <img src="/images/produccion.jpg" alt="Producción limpia" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="inline-flex items-center gap-2 bg-green-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
+                  <Factory className="w-4 h-4" /> 
+                  Cero Emisiones
+                </div>
+                <h5 className="text-xl font-bold mb-2">Proceso sin humo ni oxígeno</h5>
+                <p className="text-sm text-white/90">Tecnología limpia sin contaminación</p>
+              </div>
+            </div>
+            
+            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+              <div className="relative h-[280px] overflow-hidden">
+                <img src="/images/arbol.jpg" alt="Impacto positivo" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                <div className="inline-flex items-center gap-2 bg-emerald-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
+                  <Leaf className="w-4 h-4" /> 
+                  Sostenibilidad
+                </div>
+                <h5 className="text-xl font-bold mb-2">Materias primas para una nueva economía</h5>
+                <p className="text-sm text-white/90">Recursos sostenibles para el futuro</p>
+              </div>
             </div>
           </div>
         </div>
