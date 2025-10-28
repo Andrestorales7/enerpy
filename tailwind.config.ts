@@ -176,8 +176,8 @@ export default {
 				'morph-shape': 'morph-shape 8s ease-in-out infinite',
 			},
 			backgroundImage: {
-				'hero-pattern': "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('/lovable-uploads/59c09a67-e434-4fb0-bb13-e63dc4449891.png')",
-				'reactor-pattern': "linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/lovable-uploads/4a1464ec-94a1-4c9e-a21b-3e587ec475c1.png')",
+				'hero-pattern': "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('/images/co2hero.jpg')",
+				'reactor-pattern': "linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)), url('/images/reactor2.jpg')",
 			},
 		}
 	},
