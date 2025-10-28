@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react';
 import { useEffect, useState, useCallback } from 'react';
 
 const HeroSection = () => {
@@ -12,15 +11,11 @@ const HeroSection = () => {
       backgroundImage: "/images/zero-emission.jpg"
     },
     {
-      text: "Transformamos residuos en",
-      highlight: "recursos",
+      text: "Una tecnología única que convierte la basura en",
+      highlight:"materia prima y energía",
       backgroundImage: "/images/separacion-purificacion.jpg"
     },
-    {
-      text: "Una tecnología única que convierte la basura en",
-      highlight: "materia prima y energía",
-      backgroundImage: "/images/reactor2.jpg"
-    },
+   
     
   ];
 
@@ -78,17 +73,7 @@ const HeroSection = () => {
           </h1>
           
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-end">
-            <a href="/tecnologia" className="bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center group">
-              Descubre el RMO
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </a>
-            
-            <button className="bg-transparent border-2 border-white/30 hover:border-white/60 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:bg-white/10 flex items-center justify-center group">
-              Oportunidades de Inversión
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </button>
-          </div>
+          
         </div>
       </div>
     </section>

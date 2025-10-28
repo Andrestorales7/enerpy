@@ -1,5 +1,4 @@
 import HistorySection from "@/components/HistorySection";
-import HistoryHero from "@/components/HistoryHero";
 import HistoryMedia from "@/components/HistoryMedia";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -9,7 +8,7 @@ const History = () => {
   return (
     <div className="min-h-screen">
       <Navbar />
-      <HistoryHero />
+      
       <HistorySection />
       <HistoryMedia />
       <Footer />

@@ -1,5 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Recycle, Zap, CheckCircle } from 'lucide-react';
 
 interface ProcessStep {
@@ -43,218 +43,220 @@ const processSteps: ProcessStep[] = [
 ];
 
 const ProcesoRMO: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(containerRef, { once: true });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start('visible');
-    }
-  }, [isInView, controls]);
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.3
+  // Simplified animation variants with correct TypeScript types
+  const fadeUpVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1] as const
       }
     }
   };
 
-  const stepVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.9
-    },
+  const staggerContainer = {
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      y: 0,
-      scale: 1
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
     }
   };
 
   return (
     <div className="relative bg-black">
-      {/* Header Section */}
-      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden py-8">
-        {/* Background */}
+      {/* Header Section - Más Compacto */}
+      <section className="relative py-12 lg:py-16 overflow-hidden">
+        {/* Video Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-gray-900/50 to-black/70 z-10" />
-          <motion.div 
-            className="absolute inset-0 opacity-30"
-            animate={{ 
-              scale: [1, 1.1, 1],
-              rotate: [0, 2, -2, 0] 
-            }}
-            transition={{ 
-              duration: 20, 
-              repeat: Infinity,
-              ease: "linear" 
-            }}
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            playsInline
+            className="w-full h-full object-cover opacity-70"
           >
-            <div 
-              className="w-full h-full bg-cover bg-center filter blur-sm"
-              style={{ 
-                backgroundImage: `url('/images/reactor2.jpg')`
-              }}
-            />
-          </motion.div>
+            <source src="/images/videobackground.webm" type="video/webm" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-gray-900/30 to-black/40" />
         </div>
 
-        <div className="relative z-20 container mx-auto px-6 text-center max-w-4xl">
+        <div className="relative z-10 container mx-auto px-6 text-center max-w-4xl">
           <motion.div
-            ref={containerRef}
-            variants={containerVariants}
+            variants={staggerContainer}
             initial="hidden"
-            animate={controls}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="space-y-4"
           >
-            <motion.h2 
-              variants={stepVariants}
-              className="text-4xl md:text-6xl font-bold text-white mb-4"
+            <motion.h1 
+              variants={fadeUpVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3"
             >
-              Tecnología
-              <span className="bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">
-                {" "}RMO
+              Tecnología{" "}
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">
+                RMO
               </span>
-            </motion.h2>
+            </motion.h1>
             
             <motion.p 
-              variants={stepVariants}
-              className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-6"
+              variants={fadeUpVariants}
+              className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light"
             >
-              Un invento y desarrollo tecnológico disruptivo que colabora con la naturaleza 
-              acelerando el proceso de degradación natural, pero millones de veces más rápido.
+              Proceso revolucionario que transforma residuos en recursos
             </motion.p>
 
+            {/* Scroll indicator más pequeño */}
             <motion.div
-              variants={stepVariants}
-              className="p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20 max-w-3xl mx-auto"
+              variants={fadeUpVariants}
+              className="pt-6"
             >
-              <p className="text-base text-gray-200">
-                El Reactor de Materia Orgánica (RMO) es una tecnología patentada que transforma 
-                todo tipo de desechos (excepto radioactivos y explosivos) en recursos valiosos 
-                mediante un proceso único: <span className="text-blue-400 font-semibold">radiólisis fotónica focalizada.</span>
-              </p>
-            </motion.div>
-
-            {/* Scroll indicator */}
-            <motion.div
-              variants={stepVariants}
-              className="mt-8"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              <p className="text-white/60 text-sm mb-2">Cómo funciona</p>
-              <div className="w-1 h-8 bg-gradient-to-b from-blue-400 to-transparent mx-auto"></div>
+              <div className="flex flex-col items-center gap-2">
+                <p className="text-blue-400 font-medium text-base">Descubre el proceso</p>
+                <motion.div
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="w-0.5 h-8 bg-gradient-to-b from-blue-400 via-cyan-400 to-emerald-400"
+                />
+              </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Process Steps - Scroll Sections */}
+      {/* Process Steps - Secciones Principales con Fondo Completo */}
       {processSteps.map((step, index) => (
-        <section key={step.id} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-          {/* Background Image */}
+        <section key={step.id} className="relative min-h-screen flex items-center overflow-hidden">
+          {/* Fondo de imagen completo */}
           <div className="absolute inset-0">
             <div 
               className="w-full h-full bg-cover bg-center bg-fixed"
               style={{ backgroundImage: `url('${step.backgroundImage}')` }}
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${step.color}`} />
-            <div className="absolute inset-0 bg-black/40" />
+            {/* Overlay más sutil para mejor visibilidad del contenido */}
+            <div className="absolute inset-0 bg-black/60" />
+            <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-40`} />
           </div>
 
           {/* Content */}
-          <div className="relative z-20 container mx-auto px-6">
+          <div className="relative z-20 container mx-auto px-6 py-20">
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
+              initial={{ opacity: 0, y: 80 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="grid lg:grid-cols-2 gap-12 items-center"
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ 
+                duration: 0.8, 
+                ease: [0.4, 0, 0.2, 1]
+              }}
+              className="max-w-7xl mx-auto"
             >
-              {/* Content Side */}
-              <div className={`text-white ${index % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="inline-flex items-center justify-center w-24 h-24 bg-white/20 backdrop-blur-md rounded-full mb-8"
-                >
-                  <div className="text-white">
-                    {step.icon}
-                  </div>
-                </motion.div>
-
-                <motion.h3 
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="text-6xl md:text-8xl font-bold mb-4"
-                >
-                  {step.title}
-                </motion.h3>
-
-                <motion.h4
-                  initial={{ opacity: 0, x: -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  className="text-2xl md:text-3xl font-semibold mb-6 opacity-90"
-                >
-                  {step.subtitle}
-                </motion.h4>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="text-lg md:text-xl leading-relaxed bg-black/30 backdrop-blur-sm rounded-2xl p-6 mb-8"
-                >
-                  {step.description}
-                </motion.p>
-
-                {/* Show button only for the last step (OUT) */}
-                {index === processSteps.length - 1 && (
-                  <motion.a
-                    href="/tecnologia"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+              <div className={`grid lg:grid-cols-2 gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                {/* Content Side */}
+                <div className={`text-white ${index % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
+                  <motion.div
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 1.0 }}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="inline-block bg-gradient-to-r from-blue-500 to-emerald-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:from-blue-600 hover:to-emerald-600"
+                    transition={{ duration: 0.7, delay: 0.2 }}
+                    className="space-y-8"
                   >
-                    Explorar Tecnología RMO →
-                  </motion.a>
-                )}
-              </div>
+                    {/* Título gigante y llamativo */}
+                    <div className="space-y-4">
+                      <motion.h2 
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        className="text-8xl md:text-9xl lg:text-[12rem] font-black text-white/90 leading-none"
+                      >
+                        {step.title}
+                      </motion.h2>
+                      
+                      <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                        {step.subtitle}
+                      </h3>
+                    </div>
 
-              {/* Visual Side */}
-              <div className={`${index % 2 === 0 ? 'lg:order-2' : 'lg:order-1'}`}>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.5 }}
-                  className="relative"
-                >
-                  <div className="relative w-full h-96 md:h-[500px] rounded-3xl overflow-hidden border-4 border-white/30">
-                    <div 
-                      className="w-full h-full bg-cover bg-center"
-                      style={{ backgroundImage: `url('${step.backgroundImage}')` }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  </div>
-                </motion.div>
+                    {/* Descripción en card destacado */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.5 }}
+                      className="bg-black/40 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl"
+                    >
+                      <div className="flex items-start gap-6">
+                        <div className="flex-shrink-0 w-20 h-20 bg-white/15 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+                          {step.icon}
+                        </div>
+                        <p className="text-xl md:text-2xl leading-relaxed text-gray-100 font-light">
+                          {step.description}
+                        </p>
+                      </div>
+                    </motion.div>
+
+                    {/* CTA Button mejorado para el último paso */}
+                    {index === processSteps.length - 1 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                        className="pt-6"
+                      >
+                        <motion.a
+                          href="/tecnologia"
+                          whileHover={{ 
+                            scale: 1.05,
+                            boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+                          }}
+                          whileTap={{ scale: 0.95 }}
+                          className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 text-white px-10 py-5 rounded-2xl text-xl font-semibold shadow-2xl hover:shadow-blue-500/30 transition-all duration-300"
+                        >
+                          <span>Explorar Tecnología RMO</span>
+                          <motion.span
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity }}
+                          >
+                            →
+                          </motion.span>
+                        </motion.a>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                </div>
+
+                {/* Visual Enhancement Side */}
+                <div className={`${index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, rotateY: index % 2 === 0 ? -15 : 15 }}
+                    whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ 
+                      duration: 0.8, 
+                      delay: 0.4,
+                      ease: [0.4, 0, 0.2, 1]
+                    }}
+                    className="relative"
+                  >
+                    {/* Decorative elements */}
+                    <div className="relative z-10 bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20 shadow-2xl">
+                      <div className="aspect-[5/4] rounded-2xl overflow-hidden">
+                        <div 
+                          className="w-full h-full bg-cover bg-center"
+                          style={{ backgroundImage: `url('${step.backgroundImage}')` }}
+                        />
+                      </div>
+                    </div>
+                    
+                    {/* Background glow effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-emerald-500/20 rounded-3xl blur-2xl -z-10 scale-110" />
+                  </motion.div>
+                </div>
               </div>
             </motion.div>
           </div>

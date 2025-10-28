@@ -1,6 +1,70 @@
-import { Leaf, Recycle, Factory, ShieldCheck } from 'lucide-react';
+import { Leaf, Recycle, Factory, ShieldCheck, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 
 const WhatWeDoNarrative = () => {
+  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+
+  const toggleCard = (cardId: string) => {
+    setExpandedCard(expandedCard === cardId ? null : cardId);
+  };
+
+  const impactCards = [
+    {
+      id: 'valorization',
+      image: '/images/recycle.jpg',
+      icon: Recycle,
+      category: 'Economía Circular',
+      title: 'Valorización de residuos',
+      subtitle: 'Convertimos desechos en materias primas valiosas',
+      details: {
+        description: 'Nuestro proceso RMO transforma completamente la gestión de residuos, convirtiendo lo que antes era basura en recursos valiosos para la industria.',
+        benefits: [
+          'Reducción del 95% de volumen de residuos',
+          'Generación de materias primas de alta calidad',
+          'Eliminación de la necesidad de vertederos',
+          'Creación de nuevas fuentes de ingresos'
+        ],
+        process: 'El RMO descompone los residuos a nivel molecular mediante radiólisis fotónica, separando los elementos constituyentes para su reutilización.'
+      }
+    },
+    {
+      id: 'emissions',
+      image: '/images/produccion.jpg',
+      icon: Factory,
+      category: 'Cero Emisiones',
+      title: 'Proceso sin humo ni oxígeno',
+      subtitle: 'Tecnología limpia sin contaminación',
+      details: {
+        description: 'Un proceso revolucionario que opera sin combustión, eliminando completamente las emisiones tóxicas y contribuyendo a un aire más limpio.',
+        benefits: [
+          'Cero emisiones de CO2 durante el proceso',
+          'No genera humos ni gases tóxicos',
+          'Proceso cerrado sin liberación al ambiente',
+          'Cumple con las normativas ambientales más estrictas'
+        ],
+        process: 'La tecnología RMO utiliza radiación fotónica controlada que no requiere oxígeno ni genera subproductos contaminantes.'
+      }
+    },
+    {
+      id: 'sustainability',
+      image: '/images/arbol.jpg',
+      icon: Leaf,
+      category: 'Sostenibilidad',
+      title: 'Materias primas para una nueva economía',
+      subtitle: 'Recursos sostenibles para el futuro',
+      details: {
+        description: 'Creamos un ciclo económico completamente sostenible donde los residuos se convierten en la base de una nueva economía circular.',
+        benefits: [
+          'Independencia de recursos naturales vírgenes',
+          'Reducción de la huella de carbono industrial',
+          'Creación de empleos verdes',
+          'Fomento de la economía circular local'
+        ],
+        process: 'Establecemos cadenas de suministro circulares donde los productos al final de su vida útil se convierten en materias primas para nuevos productos.'
+      }
+    }
+  ];
+
   return (
     <section className="relative w-full overflow-hidden bg-gray-50/30">
       {/* Background visual: soft green smoke layers */}
@@ -202,50 +266,114 @@ const WhatWeDoNarrative = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative h-[280px] overflow-hidden">
-                <img src="/images/recycle.jpg" alt="Reciclaje avanzado" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="inline-flex items-center gap-2 bg-enerpy-primary/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
-                  <Recycle className="w-4 h-4" /> 
-                  Economía Circular
+            {impactCards.map((card) => {
+              const IconComponent = card.icon;
+              const isExpanded = expandedCard === card.id;
+              
+              return (
+                <div key={card.id} className="relative">
+                  {/* Carta base */}
+                  <div 
+                    className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 cursor-pointer"
+                    onClick={() => toggleCard(card.id)}
+                  >
+                    <div className="relative h-[280px] overflow-hidden">
+                      <img 
+                        src={card.image} 
+                        alt={card.title} 
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                      
+                      {/* Contenido básico */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="inline-flex items-center gap-2 bg-enerpy-primary/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                            <IconComponent className="w-4 h-4" /> 
+                            {card.category}
+                          </div>
+                          <div className="w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                            <ChevronDown className="w-4 h-4" />
+                          </div>
+                        </div>
+                        <h5 className="text-xl font-bold mb-2">{card.title}</h5>
+                        <p className="text-sm text-white/90">{card.subtitle}</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Overlay expandido */}
+                  {isExpanded && (
+                    <>
+                      {/* Backdrop */}
+                      <div 
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                        onClick={() => toggleCard(card.id)}
+                      />
+                      
+                      {/* Modal expandido */}
+                      <div className="fixed inset-4 md:inset-8 lg:inset-16 z-50 flex items-center justify-center">
+                        <div className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-300">
+                          {/* Header del modal */}
+                          <div className="relative h-[200px] overflow-hidden">
+                            <img 
+                              src={card.image} 
+                              alt={card.title} 
+                              className="w-full h-full object-cover" 
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                            
+                            {/* Botón cerrar */}
+                            <button 
+                              onClick={() => toggleCard(card.id)}
+                              className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-colors"
+                            >
+                              <ChevronUp className="w-5 h-5" />
+                            </button>
+                            
+                            {/* Contenido del header */}
+                            <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                              <div className="inline-flex items-center gap-2 bg-enerpy-primary/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
+                                <IconComponent className="w-4 h-4" /> 
+                                {card.category}
+                              </div>
+                              <h5 className="text-2xl font-bold mb-2">{card.title}</h5>
+                              <p className="text-white/90">{card.subtitle}</p>
+                            </div>
+                          </div>
+                          
+                          {/* Contenido expandido */}
+                          <div className="p-8 max-h-[60vh] overflow-y-auto space-y-6">
+                            <p className="text-enerpy-gray leading-relaxed text-lg">
+                              {card.details.description}
+                            </p>
+                            
+                            <div className="space-y-4">
+                              <h6 className="text-xl font-bold text-enerpy-dark">Beneficios clave:</h6>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                {card.details.benefits.map((benefit, index) => (
+                                  <div key={index} className="flex items-start gap-3 p-3 bg-enerpy-primary/5 rounded-xl">
+                                    <div className="w-2 h-2 bg-enerpy-primary rounded-full mt-2 flex-shrink-0" />
+                                    <span className="text-enerpy-gray">{benefit}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                            
+                            <div className="space-y-3 p-4 bg-gray-50 rounded-xl">
+                              <h6 className="text-lg font-bold text-enerpy-dark">Proceso técnico:</h6>
+                              <p className="text-enerpy-gray leading-relaxed">
+                                {card.details.process}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
-                <h5 className="text-xl font-bold mb-2">Valorización de residuos</h5>
-                <p className="text-sm text-white/90">Convertimos desechos en materias primas valiosas</p>
-              </div>
-            </div>
-            
-            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative h-[280px] overflow-hidden">
-                <img src="/images/produccion.jpg" alt="Producción limpia" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="inline-flex items-center gap-2 bg-green-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
-                  <Factory className="w-4 h-4" /> 
-                  Cero Emisiones
-                </div>
-                <h5 className="text-xl font-bold mb-2">Proceso sin humo ni oxígeno</h5>
-                <p className="text-sm text-white/90">Tecnología limpia sin contaminación</p>
-              </div>
-            </div>
-            
-            <div className="group relative rounded-3xl overflow-hidden shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
-              <div className="relative h-[280px] overflow-hidden">
-                <img src="/images/arbol.jpg" alt="Impacto positivo" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                <div className="inline-flex items-center gap-2 bg-emerald-500/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm mb-3">
-                  <Leaf className="w-4 h-4" /> 
-                  Sostenibilidad
-                </div>
-                <h5 className="text-xl font-bold mb-2">Materias primas para una nueva economía</h5>
-                <p className="text-sm text-white/90">Recursos sostenibles para el futuro</p>
-              </div>
-            </div>
+              );
+            })}
           </div>
         </div>
       </div>
